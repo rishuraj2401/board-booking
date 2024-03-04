@@ -1,4 +1,5 @@
 "use client";
+import Link from 'next/link';
 import { useState } from 'react';
 
 const SignUpPage = () => {
@@ -121,9 +122,9 @@ const SignUpPage = () => {
         {/* Already Signed Up Link */}
         <p className="mt-4 text-gray-600">
           Already have an account?{' '}
-          <a href="#" className="text-blue-500 hover:underline">
+          <Link href="#" className="text-blue-500 hover:underline">
             Log In
-          </a>
+          </Link> 
         </p>
       </div>
     </div>

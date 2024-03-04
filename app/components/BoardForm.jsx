@@ -1,4 +1,5 @@
 // BoardForm.js
+
 "use client";
 import React, { useState } from 'react';
 
@@ -57,21 +58,90 @@ const BoardForm = () => {
         <h2 className="text-2xl font-semibold mb-4">Board Form</h2>
 
         <form onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
-              Board Photo
-            </label>
-            <input
-              type="text"
-              name="boardPhoto"
-              value={formData.boardPhoto}
-              onChange={handleChange}
-              className="border-b w-full py-2 focus:outline-none focus:border-blue-500"
-              placeholder="URL of Board Photo"
-              required
-            />
+        <div className="mb-4 flex">
+          <div className="w-1/2 pr-2">
+              <label className="block text-gray-700 text-sm font-bold mb-2">
+                Landmark
+              </label>
+              <input
+                type="text"
+                name="length"
+                value={formData.landmark}
+                onChange={handleChange}
+                className="border-b w-full py-2 focus:outline-none focus:border-blue-500"
+                placeholder="Country"
+                required
+              />
+            </div>
+            <div className="w-1/2 pr-2">
+              <label className="block text-gray-700 text-sm font-bold mb-2">
+                City
+              </label>
+              <input
+                type="text"
+                name="length"
+                value={formData.city}
+                onChange={handleChange}
+                className="border-b w-full py-2 focus:outline-none focus:border-blue-500"
+                placeholder="Country"
+                required
+              />
+            </div>
+
+          </div>
+         
+
+        
+          <div className="mb-4 flex">
+        
+
+            <div className="w-1/2 pl-2">
+              <label className="block text-gray-700 text-sm font-bold mb-2">
+                Pincode
+              </label>
+              <input
+                type="text"
+                name="breadth"
+                value={formData.pincode}
+                onChange={handleChange}
+                className="border-b w-full py-2 focus:outline-none focus:border-blue-500"
+                placeholder="State"
+                required
+              />
+            </div>
           </div>
 
+          <div className="mb-4 flex">
+          <div className="w-1/2 pr-2">
+              <label className="block text-gray-700 text-sm font-bold mb-2">
+                Country
+              </label>
+              <input
+                type="text"
+                name="length"
+                value={formData.country}
+                onChange={handleChange}
+                className="border-b w-full py-2 focus:outline-none focus:border-blue-500"
+                placeholder="Country"
+                required
+              />
+            </div>
+
+            <div className="w-1/2 pl-2">
+              <label className="block text-gray-700 text-sm font-bold mb-2">
+                State
+              </label>
+              <input
+                type="text"
+                name="breadth"
+                value={formData.state}
+                onChange={handleChange}
+                className="border-b w-full py-2 focus:outline-none focus:border-blue-500"
+                placeholder="State"
+                required
+              />
+            </div>
+          </div>
           <div className="mb-4 flex">
             <div className="w-1/2 pr-2">
               <label className="block text-gray-700 text-sm font-bold mb-2">
@@ -105,101 +175,7 @@ const BoardForm = () => {
           </div>
 
           {/* Add similar blocks for other fields */}
-          <div className="mb-4 flex">
-          <div className="w-1/2 pr-2">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
-                Country
-              </label>
-              <input
-                type="text"
-                name="length"
-                value={formData.country}
-                onChange={handleChange}
-                className="border-b w-full py-2 focus:outline-none focus:border-blue-500"
-                placeholder="Country"
-                required
-              />
-            </div>
-
-            <div className="w-1/2 pl-2">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
-                State
-              </label>
-              <input
-                type="text"
-                name="breadth"
-                value={formData.state}
-                onChange={handleChange}
-                className="border-b w-full py-2 focus:outline-none focus:border-blue-500"
-                placeholder="State"
-                required
-              />
-            </div>
-          </div>
-          <div className="mb-4 flex">
-          <div className="w-1/2 pr-2">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
-                City
-              </label>
-              <input
-                type="text"
-                name="length"
-                value={formData.city}
-                onChange={handleChange}
-                className="border-b w-full py-2 focus:outline-none focus:border-blue-500"
-                placeholder="Country"
-                required
-              />
-            </div>
-
-            <div className="w-1/2 pl-2">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
-                Pincode
-              </label>
-              <input
-                type="text"
-                name="breadth"
-                value={formData.pincode}
-                onChange={handleChange}
-                className="border-b w-full py-2 focus:outline-none focus:border-blue-500"
-                placeholder="State"
-                required
-              />
-            </div>
-          </div>
-
-          <div className="mb-4 flex">
-          <div className="w-1/2 pr-2">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
-                Landmark
-              </label>
-              <input
-                type="text"
-                name="length"
-                value={formData.landmark}
-                onChange={handleChange}
-                className="border-b w-full py-2 focus:outline-none focus:border-blue-500"
-                placeholder="Country"
-                required
-              />
-            </div>
-
-            <div className="w-1/2 pl-2">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
-                Company name
-              </label>
-              <input
-                type="text"
-                name="breadth"
-                value={formData.companyName}
-                onChange={handleChange}
-                className="border-b w-full py-2 focus:outline-none focus:border-blue-500"
-                placeholder="State"
-                required
-              />
-            </div>
-          </div>
-
+        
           <div className="mb-4 flex">
           <div className="w-1/2 pr-2">
               <label className="block text-gray-700 text-sm font-bold mb-2">
@@ -207,7 +183,7 @@ const BoardForm = () => {
               </label>
               <input
                 type="text"
-                name="length"
+                name="about"
                 value={formData.about}
                 onChange={handleChange}
                 className="border-b w-full py-2 focus:outline-none focus:border-blue-500"
@@ -222,14 +198,28 @@ const BoardForm = () => {
               </label>
               <input
                 type="date"
-                name="breadth"
+                name="vacantDate"
                 value={formData.vacantDate}
                 onChange={handleChange}
                 className="border-b w-full py-2 focus:outline-none focus:border-blue-500"
-                placeholder="State"
+                // placeholder=""
                 required
               />
             </div>
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              Board Photo
+            </label>
+            <input
+              type="text"
+              name="boardPhoto"
+              value={formData.boardPhoto}
+              onChange={handleChange}
+              className="border-b w-full py-2 focus:outline-none focus:border-blue-500"
+              placeholder="URL of Board Photo"
+              required
+            />
           </div>
 
 
