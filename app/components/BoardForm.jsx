@@ -2,6 +2,7 @@
 
 "use client";
 import React, { useState } from 'react';
+import ImageUpload from './BoardImageUpload';
 
 const BoardForm = () => {
   const [formData, setFormData] = useState({
@@ -12,9 +13,9 @@ const BoardForm = () => {
     city: '',
     pincode: '',
     landmark: '',
-    exactLocation: '',
+    // exactLocation: '',
     companyName: '',
-    about: '',
+    // about: '',
     vacantDate: '',
   });
 
@@ -45,16 +46,16 @@ const BoardForm = () => {
       city: '',
       pincode: '',
       landmark: '',
-      exactLocation: '',
+      // exactLocation: '',
       companyName: '',
-      about: '',
+      // about: '',
       vacantDate: '',
     });
   };
 
   return (
-    <div className="flex items-center justify-center h-screen">
-      <div className="bg-white p-8 rounded shadow-md w-96">
+    <div className="flex items-center justify-center ">
+      <div className="bg-white p-8 rounded shadow-md w-[30rem]">
         <h2 className="text-2xl font-semibold mb-4">Board Form</h2>
 
         <form onSubmit={handleSubmit}>
@@ -65,11 +66,11 @@ const BoardForm = () => {
               </label>
               <input
                 type="text"
-                name="length"
+                name="landmark"
                 value={formData.landmark}
                 onChange={handleChange}
                 className="border-b w-full py-2 focus:outline-none focus:border-blue-500"
-                placeholder="Country"
+                // placeholder="Country"
                 required
               />
             </div>
@@ -79,11 +80,11 @@ const BoardForm = () => {
               </label>
               <input
                 type="text"
-                name="length"
+                name="city"
                 value={formData.city}
                 onChange={handleChange}
                 className="border-b w-full py-2 focus:outline-none focus:border-blue-500"
-                placeholder="Country"
+                // placeholder="Country"
                 required
               />
             </div>
@@ -95,17 +96,31 @@ const BoardForm = () => {
           <div className="mb-4 flex">
         
 
-            <div className="w-1/2 pl-2">
+            <div className="w-1/2 pr-2">
               <label className="block text-gray-700 text-sm font-bold mb-2">
                 Pincode
               </label>
               <input
                 type="text"
-                name="breadth"
+                name="pincode"
                 value={formData.pincode}
                 onChange={handleChange}
                 className="border-b w-full py-2 focus:outline-none focus:border-blue-500"
-                placeholder="State"
+                // placeholder="State"
+                required
+              />
+            </div>
+            <div className="w-1/2 pl-2">
+              <label className="block text-gray-700 text-sm font-bold mb-2">
+                State
+              </label>
+              <input
+                type="text"
+                name="state"
+                value={formData.state}
+                onChange={handleChange}
+                className="border-b w-full py-2 focus:outline-none focus:border-blue-500"
+                // placeholder="State"
                 required
               />
             </div>
@@ -118,41 +133,43 @@ const BoardForm = () => {
               </label>
               <input
                 type="text"
-                name="length"
+                name="country"
                 value={formData.country}
                 onChange={handleChange}
                 className="border-b w-full py-2 focus:outline-none focus:border-blue-500"
-                placeholder="Country"
+                // placeholder="Country"
+                required
+              />
+            </div>
+            <div className="w-1/2 pl-2">
+              <label className="block text-gray-700 text-sm font-bold mb-2">
+                Board vaccant From
+              </label>
+              <input
+                type="date"
+                name="vacantDate"
+                value={formData.vacantDate}
+                onChange={handleChange}
+                className="border-b w-full py-2 focus:outline-none focus:border-blue-500"
+                // placeholder=""
                 required
               />
             </div>
 
-            <div className="w-1/2 pl-2">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
-                State
-              </label>
-              <input
-                type="text"
-                name="breadth"
-                value={formData.state}
-                onChange={handleChange}
-                className="border-b w-full py-2 focus:outline-none focus:border-blue-500"
-                placeholder="State"
-                required
-              />
-            </div>
+          
           </div>
           <div className="mb-4 flex">
             <div className="w-1/2 pr-2">
               <label className="block text-gray-700 text-sm font-bold mb-2">
-                Board Size (Length)
+                Board Size 
               </label>
               <input
                 type="number"
+                
                 name="length"
                 value={formData.boardSize.length}
                 onChange={handleChange}
-                className="border-b w-full py-2 focus:outline-none focus:border-blue-500"
+                className="border-b w-full py-2 focus:outline-none focus:border-blue-500 no-spinner"
                 placeholder="Length"
                 required
               />
@@ -160,7 +177,7 @@ const BoardForm = () => {
 
             <div className="w-1/2 pl-2">
               <label className="block text-gray-700 text-sm font-bold mb-2">
-                Board Size (Breadth)
+                Board Size
               </label>
               <input
                 type="number"
@@ -176,50 +193,9 @@ const BoardForm = () => {
 
           {/* Add similar blocks for other fields */}
         
-          <div className="mb-4 flex">
-          <div className="w-1/2 pr-2">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
-                About the board
-              </label>
-              <input
-                type="text"
-                name="about"
-                value={formData.about}
-                onChange={handleChange}
-                className="border-b w-full py-2 focus:outline-none focus:border-blue-500"
-                placeholder="Country"
-                required
-              />
-            </div>
-
-            <div className="w-1/2 pl-2">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
-                Board vaccant Date
-              </label>
-              <input
-                type="date"
-                name="vacantDate"
-                value={formData.vacantDate}
-                onChange={handleChange}
-                className="border-b w-full py-2 focus:outline-none focus:border-blue-500"
-                // placeholder=""
-                required
-              />
-            </div>
-          </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
-              Board Photo
-            </label>
-            <input
-              type="text"
-              name="boardPhoto"
-              value={formData.boardPhoto}
-              onChange={handleChange}
-              className="border-b w-full py-2 focus:outline-none focus:border-blue-500"
-              placeholder="URL of Board Photo"
-              required
-            />
+       
+          <div className="">
+           <ImageUpload/>
           </div>
 
 

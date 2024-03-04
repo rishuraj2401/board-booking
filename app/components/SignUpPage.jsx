@@ -1,8 +1,10 @@
 "use client";
 import Link from 'next/link';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { AuthContext } from '../context/AuthContext';
 
 const SignUpPage = () => {
+  const {handleSignUp}= useContext(AuthContext)
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -19,18 +21,24 @@ const SignUpPage = () => {
     });
   };
 
-  const handleSignUp = () => {
+  const handleSubmit = (e) => {
+    if(!formData.name || !formData.email || formData.password || formData.companyName || formData.confirmPassword || formData.mobileNumber ){
+      alert("Enter all the fields")
+    }
+    if(formData.password !==formData.confirmPassword){
+      alert("Confirm password is not matching with password")
+    }
+    else {
+      handleSignUp(e, formData);
+    }
     // Validation logic goes here
 
     // Assuming you are sending the entire form data to the backend
     // You may want to add additional validation and error handling
     // before sending data to the backend
 
-    const requestBody = {
-      ...formData,
-    };
-
-    console.log('Sending data to the backend:', requestBody);
+    
+    console.log('Sending data to the backend:');
   };
 
   return (
@@ -113,7 +121,7 @@ const SignUpPage = () => {
 
         {/* Sign Up Button */}
         <button
-          onClick={handleSignUp}
+          onClick={(e)=>handleSubmit(e)}
           className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none"
         >
           Sign Up
