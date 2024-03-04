@@ -64,7 +64,7 @@ const SignInPage = () => {
         </form>
 
         <p className="mt-4 text-gray-600">
-          Don't have an account? <a href="#">Sign Up</a>
+          Don&apos;t have an account? <a href="#">Sign Up</a>
         </p>
       </div>
     </div>
