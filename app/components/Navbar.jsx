@@ -40,7 +40,7 @@ const Navbar = () => {
 
         {/* Right Side - Desktop */}
         <div className="hidden md:flex space-x-4">
-          <Link href="#" className="text-white">Board owners</Link>
+          <Link href="/addBoard" className="text-white">Board owners</Link>
           <Link href="#" className="text-white">Book a board</Link>
           <Link href="/signIn" className="text-white bg-blue-600 rounded py-1 px-2">Sign In</Link>
           <Link href="/signUp" className="text-white bg-green-500 rounded py-1 px-2">Sign Up</Link>
@@ -51,7 +51,7 @@ const Navbar = () => {
       </div>
       {isMobileMenuOpen && (
         <div className="md:hidden bg-black">
-          <Link href="#" className="block py-2 px-4 text-white">Board owners</Link>
+          <Link href="/addBoard" className="block py-2 px-4 text-white">Board owners</Link>
           <Link href="#" className="block py-2 px-4 text-white">Book a board</Link>
           <div className="flex gap-2 py-2 px-4">
             <Link href="/signIn" className="block  text-white bg-blue-600 rounded py-1 px-2">Sign In</Link>
