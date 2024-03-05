@@ -1,12 +1,15 @@
 // SigninPage.js
 "use client";
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { AuthContext } from '../context/AuthContext';
 
 const SignInPage = () => {
+  const {handleSignIn} =useContext(AuthContext)
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
+  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -15,8 +18,11 @@ const SignInPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // TODO: Send formData to your backend for authentication
-    console.log('Form submitted:', formData);
+    if(!formData.email || !formData.password){
+      alert("enter all field");
+    }else{
+    handleSignIn(e,formData);
+    console.log('Form submitted:', formData);}
   };
 
   return (
@@ -57,7 +63,7 @@ const SignInPage = () => {
 
           <button
             className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
-            type="submit"
+            type="submit" onClick={(e)=>handleSubmit(e)}
           >
             Sign In
           </button>
