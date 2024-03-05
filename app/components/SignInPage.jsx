@@ -1,16 +1,25 @@
 // SigninPage.js
 "use client";
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../context/AuthContext';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 const SignInPage = () => {
-  const {handleSignIn} =useContext(AuthContext)
+  const {handleSignIn,user, setUser, prevRoute, setPrevRoute} =useContext(AuthContext)
+  const router=useRouter()
   const [formData, setFormData] = useState({
     email: '',
     password: '',
+    strategy:"local"
   });
   
-
+const dont =()=>{
+  setPrevRoute("/signIn");
+  console.log("this is prev route",prevRoute);
+  // router.push("/signUp");
+  
+}
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
@@ -70,7 +79,7 @@ const SignInPage = () => {
         </form>
 
         <p className="mt-4 text-gray-600">
-          Don&apos;t have an account? <a href="#">Sign Up</a>
+          Don&apos;t have an account? <button type='button' onClick={dont}><Link href="/signUp">Sign Up</Link></button>
         </p>
       </div>
     </div>

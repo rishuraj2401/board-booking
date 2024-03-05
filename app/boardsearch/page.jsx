@@ -1,7 +1,17 @@
+"use client";
 import Navbar from "../components/Navbar";
 import BoardsList from "../components/BoardsSearch";
-const SearchBar = () => (
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
+import { useRouter } from "next/navigation";
+
+
+const SearchBar = () => {
+  const {user} = useContext(AuthContext);
+const router= useRouter()
+  return(
   <>
+  {!user? (router.push("/signIn")):(<>
     <Navbar />
     <div className="max-w-[700px] mx-auto">
       <div className="sticky top-[70px] bg-white">
@@ -33,7 +43,8 @@ const SearchBar = () => (
       </div>
       <BoardsList />
     </div>
-  </>
-);
+    </>)}
+  </>)
+};
 
 export default SearchBar;

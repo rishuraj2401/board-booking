@@ -1,10 +1,12 @@
 "use client";
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { AuthContext } from '../context/AuthContext';
 
 const Navbar2 = () => {
+  const {user} =useContext(AuthContext)
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
- const [user, setUser]= useState("rishu");
+//  const [user, setUser]= useState("rishu");
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
   };
@@ -45,8 +47,8 @@ const Navbar2 = () => {
 
           {user? (  <>
             <select name="profile" id="" className='p-2 rounded'>
-                <option value="">{user}</option>
-                <option value=""> <Link href="/logOut" className="text-white bg-green-500 rounded py-1 px-2">Logout</Link></option>
+                <option value="">{user.email}</option>
+                <option value="">Logout</option>
             </select>
             </>
            
@@ -67,8 +69,8 @@ const Navbar2 = () => {
         
           {user?(<>  
             <select name="profile" id="" className='p-2 rounded'>
-                <option value="">{user}</option>
-                <option value="">  <Link href="/logOut" className="block text-white bg-green-500 rounded py-1 px-2">Logout</Link></option>
+                <option value="">{user.email}</option>
+                <option value=""> Logout</option>
             </select>
         </>):(<>
             <div className="flex gap-2 py-2 px-4">

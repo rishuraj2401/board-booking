@@ -4,14 +4,14 @@ import { useContext, useState } from 'react';
 import { AuthContext } from '../context/AuthContext';
 
 const SignUpPage = () => {
-  const {handleSignUp}= useContext(AuthContext)
+  const {handleSignUp, prevRoute, setPrevRoute}= useContext(AuthContext)
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     companyName: '',
     password: '',
     confirmPassword: '',
-    mobileNumber: '',
+    mobileNo: '',
   });
 
   const handleChange = (e) => {
@@ -20,17 +20,23 @@ const SignUpPage = () => {
       [e.target.name]: e.target.value,
     });
   };
+  const dont=(e)=>{
+e.preventDefault();
+setPrevRoute("/signUp")
+console.log("dont in sinUp");
+  }
 
   const handleSubmit = (e) => {
-    if(!formData.name || !formData.email || formData.password || formData.companyName || formData.confirmPassword || formData.mobileNumber ){
-      alert("Enter all the fields")
-    }
-    if(formData.password !==formData.confirmPassword){
-      alert("Confirm password is not matching with password")
-    }
-    else {
+    
+    // if(!formData.name || !formData.email || formData.password || formData.companyName || formData.confirmPassword || formData.mobileNumber ){
+    //   alert("Enter all the fields")
+    // }
+    // if(formData.password !==formData.confirmPassword){
+    //   alert("Confirm password is not matching with password")
+    // }
+    // else {
       handleSignUp(e, formData);
-    }
+    // }
     // Validation logic goes here
 
     // Assuming you are sending the entire form data to the backend
@@ -38,7 +44,7 @@ const SignUpPage = () => {
     // before sending data to the backend
 
     
-    console.log('Sending data to the backend:');
+    console.log('Sending data to the backend:',formData);
   };
 
   return (
@@ -86,8 +92,8 @@ const SignUpPage = () => {
           <label className="block text-gray-600">Mobile Number</label>
           <input
             type="text"
-            name="mobileNumber"
-            value={formData.mobileNumber}
+            name="mobileNo"
+            value={formData.mobileNo}
             onChange={handleChange}
             className="border-b w-full focus:outline-none"
           />
@@ -130,9 +136,9 @@ const SignUpPage = () => {
         {/* Already Signed Up Link */}
         <p className="mt-4 text-gray-600">
           Already have an account?{' '}
-          <Link href="#" className="text-blue-500 hover:underline">
+        <button type='button' onClick={dont}> <Link href="/signIn"  className="text-blue-500 hover:underline">   
             Log In
-          </Link> 
+          </Link> </button>
         </p>
       </div>
     </div>

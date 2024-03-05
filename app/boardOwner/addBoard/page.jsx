@@ -1,13 +1,23 @@
 "use client"
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 // import Navbar from '../components/Navbar';
 import BoardForm from '../../components/BoardForm';
 import Navbar2 from '../../components/Navbar2';
 import { AuthContext } from '@/app/context/AuthContext';
 import SignInPage from '@/app/components/SignInPage';
+import { useRouter } from 'next/navigation';
 
 const Page = () => {
     const {user} = useContext(AuthContext)
+    const router= useRouter();
+    // useEffect(() => {
+    //     // Ensure component is mounted before accessing router
+    //     if (router) {
+    //       // Your router-related logic here
+    //     }
+    //   }, [router]);
+
+
     return (
         <div>
             <div className="navb sticky">
@@ -18,9 +28,9 @@ const Page = () => {
             {user?(<>
                 <BoardForm/>
             
-            </>):(<>
-                <SignInPage/>
-            </>)}
+            </>):(router.push("/signIn")
+                
+            )}
           
             </div> 
         </div>
