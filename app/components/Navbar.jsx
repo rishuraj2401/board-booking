@@ -10,7 +10,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-black p-4">
+    <nav className="bg-black p-4 sticky top-0 z-10">
       <div className="container mx-auto flex justify-between items-center">
         {/* Left Side */}
         <div className="text-white font-semibold text-2xl ">
@@ -41,7 +41,7 @@ const Navbar = () => {
         {/* Right Side - Desktop */}
         <div className="hidden md:flex space-x-4">
           <Link href="/addBoard" className="text-white">Board owners</Link>
-          <Link href="#" className="text-white">Book a board</Link>
+          <Link href="/boardsearch" className="text-white">Book a board</Link>
           <Link href="/signIn" className="text-white bg-blue-600 rounded py-1 px-2">Sign In</Link>
           <Link href="/signUp" className="text-white bg-green-500 rounded py-1 px-2">Sign Up</Link>
         </div>
@@ -52,7 +52,7 @@ const Navbar = () => {
       {isMobileMenuOpen && (
         <div className="md:hidden bg-black">
           <Link href="/addBoard" className="block py-2 px-4 text-white">Board owners</Link>
-          <Link href="#" className="block py-2 px-4 text-white">Book a board</Link>
+          <Link href="/boardsearch" className="block py-2 px-4 text-white">Book a board</Link>
           <div className="flex gap-2 py-2 px-4">
             <Link href="/signIn" className="block  text-white bg-blue-600 rounded py-1 px-2">Sign In</Link>
             <Link href="/signUp" className="block text-white bg-green-500 rounded py-1 px-2">Sign Up</Link>
