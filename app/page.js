@@ -11,6 +11,7 @@ export default function Home() {
   const {user,setUser}= useContext(AuthContext)
   return (
    <>  
+   <Navbar/>
    <div className="px-1 md:px-3 lg:px-[7rem]">
    <CitiesBlocks/>
    </div>

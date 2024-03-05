@@ -5,6 +5,7 @@ import SignInPage from '../components/SignInPage';
 const Page = () => {
     return (
         <div>
+            <Navbar/>
             <div className="mainsignin">
                 <SignInPage/>
             </div>

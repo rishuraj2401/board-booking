@@ -54,7 +54,7 @@ const BoardForm = () => {
   };
 
   return (
-    <div className="flex items-center justify-center ">
+    <div className="flex items-center justify-center relative mt-5">
       <div className="bg-white p-8 rounded shadow-md w-[30rem]">
         <h2 className="text-2xl font-semibold mb-4">Board Form</h2>
 
