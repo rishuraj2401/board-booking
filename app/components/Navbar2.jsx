@@ -12,11 +12,11 @@ const Navbar2 = () => {
   };
 
   return (
-    <nav className="bg-black p-4 w-[100vw] ">
+    <nav className="bg-blue-950 p-4 w-[100vw] ">
       <div className="container mx-auto flex justify-between items-center">
         {/* Left Side */}
         <div className="text-white font-semibold text-2xl ">
-          <Link href="/"> booking.com</Link></div>
+          <Link href="/boardOwner">BoardOwner</Link></div>
 
         {/* Mobile Menu Toggle Button */}
         <button
@@ -46,6 +46,8 @@ const Navbar2 = () => {
           <Link href="/boardOwner/yourBoards" className="text-white">YourBoards</Link>
 
           {user? (  <>
+            <Link href="/boardOwner/bookedboards" className="text-white">BookedBoards</Link>
+
             <select name="profile" id="" className='p-2 rounded'>
                 <option value="">{user.email}</option>
                 <option value="">Logout</option>
@@ -68,6 +70,8 @@ const Navbar2 = () => {
           <Link href="/boardOwner/yourBoards" className="block py-2 px-4 text-white">YourBoards</Link>
         
           {user?(<>  
+            <Link href="/boardOwner/bookedboards" className="block py-2 px-4 text-white">BookedBoards</Link>
+
             <select name="profile" id="" className='p-2 rounded'>
                 <option value="">{user.email}</option>
                 <option value=""> Logout</option>
