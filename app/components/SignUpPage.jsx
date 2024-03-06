@@ -1,17 +1,17 @@
 "use client";
-import Link from 'next/link';
-import { useContext, useState } from 'react';
-import { AuthContext } from '../context/AuthContext';
+import Link from "next/link";
+import { useContext, useState } from "react";
+import { AuthContext } from "../context/AuthContext";
 
 const SignUpPage = () => {
-  const {handleSignUp, prevRoute, setPrevRoute}= useContext(AuthContext)
+  const { handleSignUp, prevRoute, setPrevRoute } = useContext(AuthContext);
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    companyName: '',
-    password: '',
-    confirmPassword: '',
-    mobileNo: '',
+    name: "",
+    email: "",
+    companyName: "",
+    password: "",
+    confirmPassword: "",
+    mobileNo: "",
   });
 
   const handleChange = (e) => {
@@ -20,31 +20,15 @@ const SignUpPage = () => {
       [e.target.name]: e.target.value,
     });
   };
-  const dont=(e)=>{
-e.preventDefault();
-setPrevRoute("/signUp")
-console.log("dont in sinUp");
-  }
+  const dont = (e) => {
+    e.preventDefault();
+    setPrevRoute("/signUp");
+    console.log("dont in sinUp");
+  };
 
   const handleSubmit = (e) => {
-    
-    // if(!formData.name || !formData.email || formData.password || formData.companyName || formData.confirmPassword || formData.mobileNumber ){
-    //   alert("Enter all the fields")
-    // }
-    // if(formData.password !==formData.confirmPassword){
-    //   alert("Confirm password is not matching with password")
-    // }
-    // else {
-      handleSignUp(e, formData);
-    // }
-    // Validation logic goes here
-
-    // Assuming you are sending the entire form data to the backend
-    // You may want to add additional validation and error handling
-    // before sending data to the backend
-
-    
-    console.log('Sending data to the backend:',formData);
+    handleSignUp(e, formData);
+    console.log("Sending data to the backend:", formData);
   };
 
   return (
@@ -87,8 +71,8 @@ console.log("dont in sinUp");
             className="border-b w-full focus:outline-none"
           />
         </div>
-         {/* Mobile Number Input */}
-         <div className="mb-4">
+        {/* Mobile Number Input */}
+        <div className="mb-4">
           <label className="block text-gray-600">Mobile Number</label>
           <input
             type="text"
@@ -123,11 +107,9 @@ console.log("dont in sinUp");
           />
         </div>
 
-       
-
         {/* Sign Up Button */}
         <button
-          onClick={(e)=>handleSubmit(e)}
+          onClick={(e) => handleSubmit(e)}
           className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none"
         >
           Sign Up
@@ -135,10 +117,13 @@ console.log("dont in sinUp");
 
         {/* Already Signed Up Link */}
         <p className="mt-4 text-gray-600">
-          Already have an account?{' '}
-        <button type='button' onClick={dont}> <Link href="/signIn"  className="text-blue-500 hover:underline">   
-            Log In
-          </Link> </button>
+          Already have an account?{" "}
+          <button type="button" onClick={dont}>
+            {" "}
+            <Link href="/signIn" className="text-blue-500 hover:underline">
+              Log In
+            </Link>{" "}
+          </button>
         </p>
       </div>
     </div>
