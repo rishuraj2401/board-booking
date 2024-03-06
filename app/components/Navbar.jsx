@@ -42,10 +42,16 @@ const {user}= useContext(AuthContext)
         {/* Right Side - Desktop */}
         <div className="hidden md:flex space-x-4">
 
-          <Link href="/boardOwner" className="text-white">Board owners</Link>
+          <Link href="/boardOwner" target="_blank" className="text-white"> 
+        Board Owners
+      </Link>
           <Link href="/boardsearch" className="text-white">Book a board</Link>
 
           {user? (  <>
+            <Link href="/cart" className="text-white">Cart</Link>
+
+            <Link href="/myorders" className="text-white">MyOrders</Link>
+
             <select name="profile" id="" className='p-2 rounded'>
                 <option value="">{user.email}</option>
                 <option value="">Logout</option>
@@ -64,9 +70,13 @@ const {user}= useContext(AuthContext)
       {isMobileMenuOpen && (
         <div className="md:hidden bg-black">
        
-          <Link href="/boardOwner" className="block py-2 px-4 text-white">Board owners</Link>
+          <Link href="/boardOwner" target="_blank" className="block py-2 px-4 text-white">
+          Board owners
+      </Link>
           <Link href="/boardsearch" className="block py-2 px-4 text-white">Book a board</Link>
           {user?(<>  
+            <Link href="/cart" className="block py-2 px-4 text-white">Cart</Link>
+          <Link href="/myorders" className="block py-2 px-4 text-white">MyOrders</Link>
             <select name="profile" id="" className='p-2 rounded'>
                 <option value="">{user.email}</option>
                 <option value="">Logout</option>
