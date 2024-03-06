@@ -2,7 +2,7 @@
 
 "use client";
 import React, { useContext, useState } from 'react';
-import ImageUpload from './BoardImageUpload';
+// import ImageUpload from './BoardImageUpload';
 import { AuthContext } from '../context/AuthContext';
 
 const UpdateBoardForm = () => {
@@ -38,7 +38,7 @@ const UpdateBoardForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // TODO: Send formData to your backend for processing
-    console.log('Form submitted:', formData);
+    // console.log('Form submitted:', formData);
     // Reset the form after submission
     setFormData({
       boardPhoto: '',
@@ -199,11 +199,7 @@ const UpdateBoardForm = () => {
           </div>
 
           {/* Add similar blocks for other fields */}
-        
-       
-          <div className="">
-           <ImageUpload/>
-          </div>
+      
 
 
 
