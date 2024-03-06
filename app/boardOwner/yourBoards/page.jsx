@@ -8,7 +8,7 @@ import React, { useContext } from 'react';
 
 const Page = () => {
     const {user}= useContext(AuthContext)
-    const router=useRouter()
+    // const router=useRouter()
     return (
         <div>
             <Navbar2/>
