@@ -37,7 +37,7 @@ const Navbar = () => {
         </button>
 
         {/* Right Side - Desktop */}
-        <div className="hidden md:flex space-x-4">
+        <div className="hidden md:flex items-center space-x-4">
           <Link href="/boardOwner" target="_blank" className="text-white">
             Board Owners
           </Link>

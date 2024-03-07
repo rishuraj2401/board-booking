@@ -40,7 +40,7 @@ const BillboardCards = () => {
                 <div className=" mt-8">
                   {/* <button type="button" className="m-1 p-2 text-sm bg-green-600 rounded" >Update</button> */}
                   <Link href={`/board/${billboard._id}`}   >
-                    <button type="button" className="m-1 mr-2 p-2 text-sm bg-blue-600 rounded">More Details</button>
+                    <button type="button" className="m-1 mr-2 p-2 text-sm text-white bg-blue-600 rounded">More Details</button>
                   </Link>
                 </div>
               </div>

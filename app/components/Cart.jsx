@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import Navbar from "./Navbar";
 import Image from "next/image";
 
@@ -17,6 +17,12 @@ const Cart = () => {
       reader.readAsDataURL(selectedImage);
     }
   };
+
+  useEffect(() => {
+    const today = new Date().toISOString().split("T")[0];
+    document.getElementById("dateField").setAttribute("min", today);
+  }, []);
+
   const billboards = [
     {
       id: 2,
@@ -30,15 +36,18 @@ const Cart = () => {
   return (
     <div className="container mx-auto">
       <div className="grid grid-cols-1  max-w-[700px]  mx-auto gap-4">
-        <div className="sticky top-[60px] bg-white">
-          <h1 className="text-2xl font-bold mx-2 py-2 px-1 md:mx-0">My Cart</h1>
+        <div className="sticky top-[60px] bg-white z-10">
+          <h1 className="text-2xl font-bold mx-2 py-2 px-1 md:mx-0 ">My Cart</h1>
         </div>
         {billboards.map((billboard) => (
           <div
             key={billboard.id}
-            className="flex mx-2 md:mx-0 flex-col md:flex-row lg:flex-row bg-gray-300 rounded-lg overflow-hidden"
+            className="flex relative mx-2 md:mx-0 flex-col md:flex-row lg:flex-row bg-gray-300 rounded-lg overflow-hidden"
           >
-            <div className="flex-shrink-0">
+            <div className="absolute text-xs font-bold bg-white p-1 rounded-full top-2 left-2">
+              30 X 30
+            </div>
+            <div className="flex-shrink-0 max-h-[3oopx] overflow-hidden">
               <Image
                 src={billboard.imageUrl}
                 alt="Billboard"
@@ -49,84 +58,78 @@ const Cart = () => {
               />
             </div>
             <div className="p-4 flex flex-col justify-between leading-normal">
-              <h5 className="text-gray-900 text-xl">
-                {billboard.landmark}
-              </h5>
-              <p className="text-gray-700 text-sm font-medium">
+              <h5 className="text-gray-900 text-lg">{billboard.landmark}</h5>
+              <p className="text-gray-700 text-sm mb-2 font-medium">
                 {billboard.location}
               </p>
               <p className="text-gray-900 font-bold">{billboard.price}</p>
 
-              <div className="text-gray-700 font-medium">
-                <label htmlFor="">Booking Months:</label>
-                <button
-                  type="button"
-                  className="px-2 m-1 mx-2 rounded bg-gray-400"
+              <div className="text-gray-700 text-sm font-medium my-2 p-[4px] border-2 border-pink-500 rounded-md">
+                <label htmlFor="months">Booking Months:</label>{" "}
+                <select
+                  name="months"
+                  id="months"
+                  className="bg-gray-300 border p-1"
                 >
-                  +
-                </button>
-                {3}
-                <button
-                  type="button"
-                  className="px-2 m-1 mx-2 rounded bg-gray-400"
-                >
-                  -
-                </button>
+                  <option value={1}>1</option>
+                  <option value={2}>2</option>
+                  <option value={3}>3</option>
+                  <option value={4}>4</option>
+                  <option value={5}>5</option>
+                </select>
               </div>
-              <div className="flex my-1 text-gray-700 font-medium">
+              <div className="flex items-center text-sm text-gray-700 mb-2 p-[4px] border-2 border-pink-500 rounded-md font-medium">
                 <label htmlFor="startDate" className="mr-1">
                   {" "}
                   Start Date:
                 </label>
-                <input type="date" name="" id="" className=" rounded bg-none" />
+                <input
+                  type="date"
+                  name="startDate"
+                  id="dateField"
+                  className="bg-gray-300 border p-1"
+                />
               </div>
               <div>
                 <label
                   htmlFor="imageUpload"
                   className="block text-gray-700 text-sm font-bold mb-2"
                 >
-                  Upload Image
+                  Upload Flex Image
                 </label>
-                <input
-                  type="file"
-                  id="imageUpload"
-                  accept="image/*"
-                  onChange={handleImageChange}
-                  className="border w-full py-2 px-3 focus:outline-none focus:border-blue-500"
-                />
-
+                <div className="p-[4px] border-2 border-pink-500 rounded-md">
+                  <input
+                    type="file"
+                    id="imageUpload"
+                    accept="image/*"
+                    onChange={handleImageChange}
+                    className="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-pink-500 hover:file:bg-violet-100"
+                  />
+                </div>
                 {image && (
-                  <div className="mt-4">
+                  <div className="mt-4 max-w-[300px]">
                     <label className="block text-gray-700 text-sm font-bold mb-2">
                       Image Preview
                     </label>
-                    <img
-                      src={image}
-                      alt="Preview"
-                      className="max-w-full h-auto"
-                    />
+                    <img src={image} alt="Preview" className="max-h-xs" />
                   </div>
                 )}
               </div>
             </div>
-            <div className="flex justify-between w-full relative ">
-              <div className=""></div>
-              <div className="grid grid-rows-[80%,20%] ">
-                <div className=""></div>
-                <div className="">
-                  <button
-                    type="button"
-                    className="m-1 p-2 text-sm bg-green-600 rounded"
-                  >
-                    Buy
-                  </button>
-                  <button
-                    type="button"
-                    className="m-1 mr-2 p-2 text-sm bg-red-600 rounded"
-                  >
-                    Delete
-                  </button>
-                </div>
+            <div className="flex items-end m-2">
+              <div className="">
+                <button
+                  type="button"
+                  className="m-1 p-2 w-full text-sm bg-green-800 text-white rounded"
+                >
+                  Pay & Book
+                </button>
+                <button
+                  type="button"
+                  className="m-1 mr-2 p-2 w-full text-sm bg-red-600 text-white rounded"
+                >
+                  Delete
+                </button>
               </div>
             </div>
           </div>
@@ -137,4 +140,3 @@ const Cart = () => {
 };
 
 export default Cart;
-
