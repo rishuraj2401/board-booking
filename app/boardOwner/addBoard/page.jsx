@@ -3,11 +3,12 @@ import React, { useContext, useEffect } from "react";
 import BoardForm from "../../components/BoardForm";
 import Navbar2 from "../../components/Navbar2";
 import { AuthContext } from "@/app/context/AuthContext";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
+import SignInPage from "@/app/components/SignInPage";
 
 const Page = () => {
   const { user } = useContext(AuthContext);
-  const router = useRouter();
+  // const router = useRouter();
   return (
     <div>
       <div className="navb sticky">
@@ -19,7 +20,8 @@ const Page = () => {
             <BoardForm />
           </>
         ) : (
-          router.push("/signIn")
+          // router.push("/signIn")
+          <SignInPage/>
         )}
       </div>
     </div>
