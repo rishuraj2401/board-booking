@@ -56,7 +56,7 @@ const Navbar = () => {
               </Link>
 
               <select name="profile" id="" className="p-2 rounded">
-                <option value="">{user.email}</option>
+                <option value="">{user.name}</option>
                 <option value="">Logout</option>
               </select>
             </>
@@ -102,7 +102,7 @@ const Navbar = () => {
                 MyOrders
               </Link>
               <select name="profile" id="" className="p-2 rounded">
-                <option value="">{user.email}</option>
+                <option value="">{user.name}</option>
                 <option value="">Logout</option>
               </select>
             </>
