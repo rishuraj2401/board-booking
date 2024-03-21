@@ -6,13 +6,12 @@ import { AuthContext } from "../context/AuthContext";
 const Navbar2 = () => {
   const { user } = useContext(AuthContext);
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
-  //  const [user, setUser]= useState("rishu");
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
   };
 
   return (
-    <nav className="bg-blue-950 p-4 sticky top-0 z-10 ">
+    <nav className="bg-blue-950 p-4 sticky top-0 z-20">
       <div className="container mx-auto flex justify-between items-center">
         {/* Left Side */}
         <div className="text-white font-semibold text-2xl ">

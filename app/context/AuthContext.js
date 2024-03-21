@@ -34,10 +34,8 @@ export const AuthProvider = ({ children }) => {
         router.back();
       }
       router.back();
-      // Handle success, e.g., redirect to login page
     } catch (error) {
       console.error('Sign up failed:', error.response.data);
-      // Handle error, show error message, etc.
     }
 
   };
