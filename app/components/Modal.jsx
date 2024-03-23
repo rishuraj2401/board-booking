@@ -5,7 +5,7 @@ import Modal from 'react-modal';
 import UpdateBoardForm from './UpdateBoardForm';
 
 
-const MyModal = ({ isOpen, onRequestClose }) => {
+const MyModal = ({ isOpen, onRequestClose,id  }) => {
   return (
     <div className="modal ">
     <Modal className="flex items-center justify-center mt-12"
@@ -23,7 +23,7 @@ const MyModal = ({ isOpen, onRequestClose }) => {
         },
       }}
     >
-    <UpdateBoardForm/>
+    <UpdateBoardForm imageId={id}/>
     </Modal>
     </div>
   );
