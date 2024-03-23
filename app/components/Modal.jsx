@@ -2,13 +2,10 @@
 "use client";
 import React, { useContext, useState } from 'react';
 import Modal from 'react-modal';
-// import BoardForm from './BoardForm';
 import UpdateBoardForm from './UpdateBoardForm';
-// Modal.setAppElement('#__next');
 
 
 const MyModal = ({ isOpen, onRequestClose }) => {
-//   const [inputValue, setInputValue] = useState('');
   return (
     <div className="modal ">
     <Modal className="flex items-center justify-center mt-12"

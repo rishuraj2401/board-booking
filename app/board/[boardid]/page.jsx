@@ -3,14 +3,18 @@ import Image from "next/image";
 import React, { useEffect, useContext } from "react";
 import Navbar from "@/app/components/Navbar";
 import { BoardContext } from "@/app/context/BoardContext";
-
+import { CartContext } from "@/app/context/CartContext";
 function BillboardComponent({ params }) {
   // Example billboard data (replace or dynamically fetch as needed)
   const { boardData, fetchSingleBoard } = useContext(BoardContext);
-
+  const { addtoCart } = useContext(CartContext);
   useEffect(() => {
     fetchSingleBoard(params.boardid);
   }, []);
+
+  const handelAddtoCart = () => {
+    addtoCart(params.boardid);
+  };
 
   return (
     <>
@@ -67,7 +71,10 @@ function BillboardComponent({ params }) {
                 <h5 className="text-lg font-semibold">Price:</h5>
                 <h5>Rs.{boardData.boardvacanDate} /Month</h5>
               </div>
-              <div className="p-4 bg-blue-700 rounded-lg w-full">
+              <div
+                onClick={handelAddtoCart}
+                className="p-4 bg-blue-700 rounded-lg w-full"
+              >
                 <h1 className="text-white text-xl py-3 font-bold">
                   Add to cart
                 </h1>

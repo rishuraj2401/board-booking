@@ -15,9 +15,7 @@ const UpdateBoardForm = () => {
     city: '',
     pincode: '',
     landmark: '',
-    // exactLocation: '',
     companyName: '',
-    // about: '',
     vacantDate: '',
   });
 
@@ -37,9 +35,6 @@ const UpdateBoardForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // TODO: Send formData to your backend for processing
-    // console.log('Form submitted:', formData);
-    // Reset the form after submission
     setFormData({
       boardPhoto: '',
       boardSize: { length: '', breadth: '' },
@@ -48,9 +43,7 @@ const UpdateBoardForm = () => {
       city: '',
       pincode: '',
       landmark: '',
-      // exactLocation: '',
       companyName: '',
-      // about: '',
       vacantDate: '',
     });
   };

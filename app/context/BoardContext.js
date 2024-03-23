@@ -12,14 +12,20 @@ export const BoardContextProvider = ({ children }) => {
   const [boardData, setBoardData] = useState(null);
   const baseUrl = "http://localhost:8000/api/v1";
 
+
   const addBoard = async (formData) => {
     console.log("formdata is recieved", formData);
     try {
-      const response = await axios.post(`${baseUrl}/billboards`, formData);
+      const response = await axios.post(`${baseUrl}/billboards`, formData,
+        {
+          headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem("token")
+          }
+        });
       console.log(response.data)
       // Handle success, e.g., redirect to login page
     } catch (error) {
-      console.error('Sign up failed:', error.response.data);
+      console.error('Sign up failed:', error);
       // Handle error, show error message, etc.
     }
 
@@ -28,7 +34,7 @@ export const BoardContextProvider = ({ children }) => {
   const fetchSingleBoard = async (boardId) => {
     try {
       const response = await axios.get(`${baseUrl}/billboards/${boardId}`);
-      setBoardData(response.data);
+      setBoardData(response.data.data);
     } catch (error) {
       console.error('Board Fetching failed:', error);
       // Handle error, show error message, etc.

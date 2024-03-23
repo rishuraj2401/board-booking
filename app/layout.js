@@ -3,7 +3,7 @@ import "./globals.css";
 import Navbar from "./components/Navbar";
 import { AuthProvider } from "./context/AuthContext";
 import { BoardContextProvider } from "./context/BoardContext";
-
+import { CartContextProvider } from "./context/CartContext"
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -16,11 +16,13 @@ export default function RootLayout({ children }) {
 
     <AuthProvider>
       <BoardContextProvider>
-        <html lang="en">
-          <body className={inter.className}>
-            {children}
-          </body>
-        </html>
+        <CartContextProvider>
+          <html lang="en">
+            <body className={inter.className}>
+              {children}
+            </body>
+          </html>
+        </CartContextProvider>
       </BoardContextProvider>
     </AuthProvider>
 

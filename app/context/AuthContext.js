@@ -52,6 +52,7 @@ export const AuthProvider = ({ children }) => {
       setUser(response.data.data.user);
       router.back();
       console.log('Sign in successful:', " ", response.data);
+      localStorage.setItem("token",response.data.data.accessToken);
     } catch (error) {
       console.error('Sign in failed:', error);
       // Handle error, show error message, etc.

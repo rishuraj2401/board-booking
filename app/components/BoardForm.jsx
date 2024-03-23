@@ -17,7 +17,7 @@ const BoardForm = () => {
     city: "",
     pincode: "",
     landmark: "",
-    vacantDate: "",
+    boardvacanDate: "",
   });
   useEffect(() => {
     if (!flag) return;
@@ -31,7 +31,7 @@ const BoardForm = () => {
       city: "",
       pincode: "",
       landmark: "",
-      vacantDate: "",
+      boardvacanDate: "",
     });
   }, [flag]);
 
@@ -172,8 +172,8 @@ const BoardForm = () => {
               </label>
               <input
                 type="date"
-                name="vacantDate"
-                value={formData.vacantDate}
+                name="boardvacanDate"
+                value={formData.boardvacanDate}
                 onChange={handleChange}
                 className="border-b w-full py-2 focus:outline-none focus:border-blue-500"
                 // placeholder=""
