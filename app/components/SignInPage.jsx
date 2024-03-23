@@ -10,8 +10,7 @@ const SignInPage = () => {
   const router=useRouter()
   const [formData, setFormData] = useState({
     email: '',
-    password: '',
-    strategy:"local"
+    password: ''
   });
   
 const dont =()=>{

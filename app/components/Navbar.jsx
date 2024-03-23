@@ -11,7 +11,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-black p-4 sticky top-0 z-10">
+    <nav className="bg-black p-4 sticky top-0 z-20">
       <div className="container mx-auto flex justify-between items-center">
         {/* Left Side */}
         <div className="text-white font-semibold text-2xl ">
@@ -56,7 +56,7 @@ const Navbar = () => {
               </Link>
 
               <select name="profile" id="" className="p-2 rounded">
-                <option value="">{user.email}</option>
+                <option value="">{user.name}</option>
                 <option value="">Logout</option>
               </select>
             </>
@@ -102,7 +102,7 @@ const Navbar = () => {
                 MyOrders
               </Link>
               <select name="profile" id="" className="p-2 rounded">
-                <option value="">{user.email}</option>
+                <option value="">{user.name}</option>
                 <option value="">Logout</option>
               </select>
             </>

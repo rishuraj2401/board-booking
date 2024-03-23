@@ -6,17 +6,19 @@ import { AuthContext } from "../context/AuthContext";
 const Navbar2 = () => {
   const { user } = useContext(AuthContext);
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
-  //  const [user, setUser]= useState("rishu");
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
   };
 
   return (
-    <nav className="bg-blue-950 p-4 sticky top-0 z-10 ">
+    <nav className="bg-blue-950 p-4 sticky top-0 z-20">
       <div className="container mx-auto flex justify-between items-center">
         {/* Left Side */}
         <div className="text-white font-semibold text-2xl ">
-          <Link href="/boardOwner">BoardOwner</Link>
+          <Link href="/boardOwner">
+            Booking.com{" "}
+            <small className="text-[10px] font-normal">(Board Owners)</small>
+          </Link>
         </div>
 
         {/* Mobile Menu Toggle Button */}
@@ -54,7 +56,7 @@ const Navbar2 = () => {
               </Link>
 
               <select name="profile" id="" className="p-2 rounded">
-                <option value="">{user.email}</option>
+                <option value="">{user.name}</option>
                 <option value="">Logout</option>
               </select>
             </>
@@ -80,22 +82,22 @@ const Navbar2 = () => {
         {/* Mobile Menu - Visible on Small Screens */}
       </div>
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-black">
+        <div className="md:hidden bg-blue-950">
           <Link
             href="/boardOwner/addBoard"
             className="block py-2 px-4 text-white"
           >
             AddBoard
           </Link>
-          <Link
-            href="/boardOwner/yourBoards"
-            className="block py-2 px-4 text-white"
-          >
-            YourBoards
-          </Link>
 
           {user ? (
             <>
+              <Link
+                href="/boardOwner/yourBoards"
+                className="block py-2 px-4 text-white"
+              >
+                YourBoards
+              </Link> 
               <Link
                 href="/boardOwner/bookedboards"
                 className="block py-2 px-4 text-white"
@@ -104,7 +106,7 @@ const Navbar2 = () => {
               </Link>
 
               <select name="profile" id="" className="p-2 rounded">
-                <option value="">{user.email}</option>
+                <option value="">{user.name}</option>
                 <option value=""> Logout</option>
               </select>
             </>

@@ -10,7 +10,7 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [prevRoute, setPrevRoute] = useState("/")
   const [isModalOpen, setModalOpen] = useState(false);
-  const baseUrl = "http://localhost:3030";
+  const baseUrl = "http://localhost:8000/api/v1/users";
   const openModal = () => {
     setModalOpen(true);
   };
@@ -24,7 +24,7 @@ export const AuthProvider = ({ children }) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post(`${baseUrl}/users`, formData);
+      const response = await axios.post(`${baseUrl}/signup`, formData);
       console.log('Sign up successful:', response.data);
       setUser(response.data);
       if (prevRoute === "/signIn") {
@@ -34,26 +34,25 @@ export const AuthProvider = ({ children }) => {
         router.back();
       }
       router.back();
-      // Handle success, e.g., redirect to login page
     } catch (error) {
       console.error('Sign up failed:', error.response.data);
-      // Handle error, show error message, etc.
     }
 
   };
 
-  
+
   const handleSignIn = async (e, formData) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${baseUrl}/authentication`, formData);
+      const response = await axios.post(`${baseUrl}/login`, formData);
       if (prevRoute === "/signUp") {
         setPrevRoute("/")
         router.back();
       }
-      setUser(response.data.user);
+      setUser(response.data.data.user);
       router.back();
       console.log('Sign in successful:', " ", response.data);
+      localStorage.setItem("token",response.data.data.accessToken);
     } catch (error) {
       console.error('Sign in failed:', error);
       // Handle error, show error message, etc.
