@@ -85,13 +85,13 @@ const Navbar = () => {
               {" "}
               <Link
                 href="/signIn"
-                className="text-white bg-blue-600 rounded py-1 px-2"
+                className="btn btn-active btn-primary"
               >
                 Sign In
               </Link>
               <Link
                 href="/signUp"
-                className="text-white bg-green-500 rounded py-1 px-2"
+                className="btn btn-outline btn-secondary"
               >
                 Sign Up
               </Link>
@@ -143,13 +143,13 @@ const Navbar = () => {
               <div className="flex gap-2 py-2 px-4">
                 <Link
                   href="/signIn"
-                  className="block  text-white bg-blue-600 rounded py-1 px-2"
+                  className="btn btn-active btn-primary"
                 >
                   Sign In
                 </Link>
                 <Link
                   href="/signUp"
-                  className="block text-white bg-green-500 rounded py-1 px-2"
+                  className="btn btn-outline btn-secondary"
                 >
                   Sign Up
                 </Link>
