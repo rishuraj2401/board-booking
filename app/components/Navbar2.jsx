@@ -2,6 +2,8 @@
 import Link from "next/link";
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
+import { FaUserCircle } from "react-icons/fa";
+import { FaChevronDown } from "react-icons/fa";
 
 const Navbar2 = () => {
   const { user } = useContext(AuthContext);
@@ -55,10 +57,23 @@ const Navbar2 = () => {
                 Booked Boards
               </Link>
 
-              <select name="profile" id="" className="p-2 rounded">
-                <option value="">{user.name}</option>
-                <option value="">Logout</option>
-              </select>
+              {/* for use name display and logout */}
+              <div className="relative">
+                <div
+                  className="flex items-center gap-1 cursor-pointer select-none bg-gray-800 py-1 px-2 rounded-lg"
+                  onClick={toggleDropdown}
+                >
+                  <FaUserCircle className="text-3xl" />
+                  <span>{user.name}</span>
+                  <FaChevronDown />
+                </div>
+
+                {isOpen && (
+                  <button className="absolute right-0 my-1 btn btn-error w-48">
+                    LogOut
+                  </button>
+                )}
+              </div>
             </>
           ) : (
             <>
@@ -97,7 +112,7 @@ const Navbar2 = () => {
                 className="block py-2 px-4 text-white"
               >
                 YourBoards
-              </Link> 
+              </Link>
               <Link
                 href="/boardOwner/bookedboards"
                 className="block py-2 px-4 text-white"
@@ -105,10 +120,23 @@ const Navbar2 = () => {
                 BookedBoards
               </Link>
 
-              <select name="profile" id="" className="p-2 rounded">
-                <option value="">{user.name}</option>
-                <option value=""> Logout</option>
-              </select>
+              {/* for use name display and logout */}
+              <div className="relative">
+                <div
+                  className="inline-flex items-center gap-1 cursor-pointer select-none bg-gray-800 py-1 px-2 rounded-lg"
+                  onClick={toggleDropdown}
+                >
+                  <FaUserCircle className="text-3xl" />
+                  <span>{user.name}</span>
+                  <FaChevronDown />
+                </div>
+
+                {isOpen && (
+                  <button className="absolute left-0 top-10 my-1 btn py-1 btn-error w-48">
+                    LogOut
+                  </button>
+                )}
+              </div>
             </>
           ) : (
             <>
