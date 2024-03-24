@@ -10,7 +10,7 @@ export const CartContextProvider = ({ children }) => {
             const response = await axios.post(`${baseUrl}/cart`, { "billBoardId": boardId },
                 {
                     headers: {
-                        'Authorization': 'Bearer ' + localStorage.getItem("token")
+                        Authorization: localStorage.getItem("token")
                     }
                 });
             

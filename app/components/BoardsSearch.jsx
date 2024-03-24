@@ -5,7 +5,9 @@ import { BoardContext } from "../context/BoardContext";
 import Link from "next/link";
 const BillboardCards = () => {
   const { fetchListofBoard, boardsList } = useContext(BoardContext);
-  fetchListofBoard();
+  useEffect(()=>{
+    fetchListofBoard();
+  },[])
   return (
     <div className="container mx-auto py-2">
       <div className="grid grid-cols-1  max-w-[700px]  mx-auto gap-4">
@@ -26,10 +28,10 @@ const BillboardCards = () => {
             </div>
             <div className="p-4 flex flex-col justify-between leading-normal">
               <h5 className="text-gray-900 font-bold text-xl">
-                {billboard.landMark}
+                {billboard.address.landMark}
               </h5>
               <p className="text-gray-700 text-lg font-medium">
-                {billboard.cityOrVillage},{billboard.state},{billboard.country}
+                {billboard.address.city},{billboard.address.state},{billboard.address.country}
               </p>
               <p className="text-gray-900 font-bold">{billboard.boardvacanDate}</p>
             </div>

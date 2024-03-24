@@ -1,9 +1,10 @@
+// BoardForm.js
+
 "use client";
 import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { BoardContext } from "../context/BoardContext";
-// import { useEffect } from "react/cjs/react.production.min";
-// import { useEffect } from "react/cjs/react.development";
+
 const BoardForm = () => {
   const { addBoard } = useContext(BoardContext);
   const [image, setImage] = useState(null);
@@ -12,27 +13,32 @@ const BoardForm = () => {
     boardPhotoUrl: "",
     length: "",
     breadth: "",
-    country: "",
-    state: "",
-    city: "",
-    pincode: "",
-    landmark: "",
-    boardvacanDate: "",
-  });
-  useEffect(() => {
-    if (!flag) return;
-    addBoard(formData);
-    setFormData({
-      boardPhotoUrl: "",
-      length: "",
-      breadth: "",
+    address: {
       country: "",
       state: "",
       city: "",
       pincode: "",
       landmark: "",
-      boardvacanDate: "",
-    });
+    },
+    boardvacanDate: "",
+  });
+
+  useEffect(() => {
+    if (!flag) return;
+    addBoard(formData);
+    // setFormData({
+    //   boardPhotoUrl: "",
+    //   length: "",
+    //   breadth: "",
+    //   address: {
+    //     country: "",
+    //     state: "",
+    //     city: "",
+    //     pincode: "",
+    //     landmark: "",
+    //   },
+    //   boardvacanDate: "",
+    // });
   }, [flag]);
 
   const handleImageChange = async (e) => {
@@ -49,21 +55,38 @@ const BoardForm = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
+
+    if (name.includes('.')) {
+      const [parent, child] = name.split('.');
+      setFormData((prevData) => ({
+        ...prevData,
+        address: {
+          ...prevData.address,
+          [child]: value
+        }
+      }));
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value
+      }));
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await uploadToCloudinary(image);
-    } catch (error) {}
+    } catch (error) {
+      console.error("Error uploading image to Cloudinary:", error);
+    }
     console.log(formData);
   };
 
   const uploadToCloudinary = async (file) => {
     const imageData = new FormData();
     imageData.append("file", file);
-    imageData.append("upload_preset", "dzdedmky ");
+    imageData.append("upload_preset", "dzdedmky");
 
     try {
       const { data } = await axios.post(
@@ -72,13 +95,11 @@ const BoardForm = () => {
       );
 
       const imageUrl = data.secure_url;
-      console.log("imageurl", imageUrl);
       setFormData((prevState) => ({
         ...prevState,
         boardPhotoUrl: imageUrl,
       }));
       setFlag(!flag);
-      // setFormData((prevData) => ({ ...prevData, boardPhotoUrl: imageUrl }));
     } catch (error) {
       console.error("Error uploading image to Cloudinary:", error);
     }
@@ -97,11 +118,10 @@ const BoardForm = () => {
               </label>
               <input
                 type="text"
-                name="landmark"
-                value={formData.landmark}
+                name="address.landmark"
+                value={formData.address.landmark}
                 onChange={handleChange}
                 className="border-b w-full py-2 focus:outline-none focus:border-blue-500"
-                // placeholder="Country"
                 required
               />
             </div>
@@ -111,8 +131,8 @@ const BoardForm = () => {
               </label>
               <input
                 type="text"
-                name="city"
-                value={formData.city}
+                name="address.city"
+                value={formData.address.city}
                 onChange={handleChange}
                 className="border-b w-full py-2 focus:outline-none focus:border-blue-500"
                 required
@@ -127,11 +147,10 @@ const BoardForm = () => {
               </label>
               <input
                 type="text"
-                name="pincode"
-                value={formData.pincode}
+                name="address.pincode"
+                value={formData.address.pincode}
                 onChange={handleChange}
                 className="border-b w-full py-2 focus:outline-none focus:border-blue-500"
-                // placeholder="State"
                 required
               />
             </div>
@@ -141,11 +160,10 @@ const BoardForm = () => {
               </label>
               <input
                 type="text"
-                name="state"
-                value={formData.state}
+                name="address.state"
+                value={formData.address.state}
                 onChange={handleChange}
                 className="border-b w-full py-2 focus:outline-none focus:border-blue-500"
-                // placeholder="State"
                 required
               />
             </div>
@@ -158,17 +176,16 @@ const BoardForm = () => {
               </label>
               <input
                 type="text"
-                name="country"
-                value={formData.country}
+                name="address.country"
+                value={formData.address.country}
                 onChange={handleChange}
                 className="border-b w-full py-2 focus:outline-none focus:border-blue-500"
-                // placeholder="Country"
                 required
               />
             </div>
             <div className="w-1/2 pl-2">
               <label className="block text-gray-700 text-sm font-bold mb-2">
-                Board vaccant From
+                Board Vacant From
               </label>
               <input
                 type="date"
@@ -176,15 +193,15 @@ const BoardForm = () => {
                 value={formData.boardvacanDate}
                 onChange={handleChange}
                 className="border-b w-full py-2 focus:outline-none focus:border-blue-500"
-                // placeholder=""
                 required
               />
             </div>
           </div>
+
           <div className="mb-4 flex">
             <div className="w-1/2 pr-2">
               <label className="block text-gray-700 text-sm font-bold mb-2">
-                Board Size
+                Board Length
               </label>
               <input
                 type="number"

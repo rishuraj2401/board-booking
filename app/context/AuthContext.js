@@ -11,6 +11,32 @@ export const AuthProvider = ({ children }) => {
   const [prevRoute, setPrevRoute] = useState("/")
   const [isModalOpen, setModalOpen] = useState(false);
   const baseUrl = "http://localhost:8000/api/v1/users";
+  useEffect(() => {
+    if (!user) {
+      auth().then((res) => {
+        setUser(res?.data.user)
+        // console.log(res.data.user.name);
+      })
+    }
+  }, [user])
+  const auth = async () => {
+    try {
+      const response = await axios.get(`${baseUrl}`, {
+        credentials: 'include', // Include cookies in the request
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: localStorage.getItem('token')
+        }
+      });
+      // console.log("initial", response.data);
+      return response.data;
+    } catch (error) {
+      // alert("invalid input")
+
+    }
+  };
+
+
   const openModal = () => {
     setModalOpen(true);
   };
@@ -50,9 +76,9 @@ export const AuthProvider = ({ children }) => {
         router.back();
       }
       setUser(response.data.data.user);
+      localStorage.setItem("token", response.data.data.accessToken);
       router.back();
       console.log('Sign in successful:', " ", response.data);
-      localStorage.setItem("token",response.data.data.accessToken);
     } catch (error) {
       console.error('Sign in failed:', error);
       // Handle error, show error message, etc.
