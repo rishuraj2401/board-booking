@@ -36,7 +36,7 @@ const Cart = () => {
   return (
     <div className="container mx-auto">
       <div className="grid grid-cols-1  max-w-[700px]  mx-auto gap-4">
-        <div className="sticky top-[60px] bg-white z-10">
+        <div className="sticky top-[60px]  z-10">
           <h1 className="text-2xl font-bold mx-2 py-2 px-1 md:mx-0 ">My Cart</h1>
         </div>
         {billboards.map((billboard) => (

@@ -1,5 +1,4 @@
 import React from 'react';
-
 const CitiesBlocks = () => {
     const citiesData = [
         { id: 1, name: 'Mumbai' },
@@ -24,7 +23,8 @@ const CitiesBlocks = () => {
                             // onClick={() => handleCityClick(city.name)}
                             className="py-[4rem] rounded flex items-center justify-center bg-gray-200 cursor-pointer"
                         >
-                            <h1 className='text-2xl font-semibold'>{city.name}</h1>
+                        
+                            <h1 className='text-2xl font-semibold text-black'> {city.name}</h1>
                         </div>
                     ))}
                 </div>
