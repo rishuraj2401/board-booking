@@ -18,7 +18,7 @@ const Navbar2 = () => {
   const toggleDropdown = () => setIsOpen(!isOpen);
 
   return (
-    <nav className="bg-blue-950 p-4 sticky top-0 z-20">
+    <nav className="bg-red-950 p-4 sticky top-0 z-20">
       <div className="container mx-auto flex justify-between items-center">
         {/* Left Side */}
         <div className="text-white font-semibold text-2xl ">
@@ -65,7 +65,7 @@ const Navbar2 = () => {
               {/* for use name display and logout */}
               <div className="relative">
                 <div
-                  className="flex items-center gap-1 cursor-pointer select-none bg-gray-800 py-1 px-2 rounded-lg"
+                  className="flex items-center text-white gap-1 cursor-pointer select-none bg-gray-800 py-1 px-2 rounded-lg"
                   onClick={toggleDropdown}
                 >
                   <FaUserCircle className="text-3xl" />
@@ -96,7 +96,7 @@ const Navbar2 = () => {
         {/* Mobile Menu - Visible on Small Screens */}
       </div>
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-blue-950">
+        <div className="md:hidden bg-red-950">
           <Link
             href="/boardOwner/addBoard"
             className="block py-2 px-4 text-white"
@@ -122,7 +122,7 @@ const Navbar2 = () => {
               {/* for use name display and logout */}
               <div className="relative">
                 <div
-                  className="inline-flex items-center gap-1 cursor-pointer select-none bg-gray-800 py-1 px-2 rounded-lg"
+                  className="inline-flex text-white items-center gap-1 cursor-pointer select-none bg-gray-800 py-1 px-2 rounded-lg"
                   onClick={toggleDropdown}
                 >
                   <FaUserCircle className="text-3xl" />
@@ -131,7 +131,7 @@ const Navbar2 = () => {
                 </div>
 
                 {isOpen && (
-                  <button className="absolute left-0 top-10 my-1 btn py-1 btn-error w-48">
+                  <button className="absolute left-0 top-10 my-1 btn py-1 btn-error w-48 z-30">
                     LogOut
                   </button>
                 )}
