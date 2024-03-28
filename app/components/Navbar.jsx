@@ -70,7 +70,7 @@ const Navbar = () => {
               {/* for use name display and logout */}
               <div className="relative">
                 <div
-                  className="flex items-center gap-1 cursor-pointer select-none bg-gray-800 py-1 px-2 rounded-lg"
+                  className="flex items-center gap-1 cursor-pointer select-none bg-gray-800 py-1 px-2 rounded-lg text-white"
                   onClick={toggleDropdown}
                 >
                   <FaUserCircle className="text-3xl"/>
@@ -130,7 +130,7 @@ const Navbar = () => {
               {/* for use name display and logout */}
               <div className="relative">
                 <div
-                  className="inline-flex items-center gap-1 cursor-pointer select-none bg-gray-800 py-1 px-2 rounded-lg"
+                  className="inline-flex items-center gap-1 cursor-pointer text-white select-none bg-gray-800 py-1 px-2 rounded-lg"
                   onClick={toggleDropdown}
                 >
                   <FaUserCircle className="text-3xl"/>

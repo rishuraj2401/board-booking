@@ -18,7 +18,7 @@ const SearchBar = () => {
               <input
                 className="w-full text-white py-2 px-4 outline-none bg-black"
                 type="text"
-                placeholder="Search..."
+                placeholder="Search landmark, city, state..."
               />
               <div className="p-2">
                 <button className="text-white bg-black px-2 flex items-center focus:outline-none">
