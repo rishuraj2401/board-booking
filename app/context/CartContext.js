@@ -1,14 +1,18 @@
 "use client";
 import axios from 'axios';
-import { createContext, useState } from 'react';
+import { createContext, useContext, useState } from 'react';
+import { AuthContext } from './AuthContext';
 
 export const CartContext = createContext();
 export const CartContextProvider = ({ children }) => {
-    const [billboard,setBillboard]=useState({}) 
-    const [cart, setCart]= useState([])
+    const [billboard, setBillboard] = useState({})
+    const [cart, setCart] = useState([])
+    const [flag, setFlag] = useState(false)
+    const { loading, setLoading } = useContext(AuthContext)
     const baseUrl = "http://localhost:8000/api/v1";
     const addtoCart = async (boardId) => {
         try {
+            setLoading(true)
             const response = await axios.post(`${baseUrl}/cart`, { "billBoardId": boardId },
                 {
                     headers: {
@@ -16,47 +20,91 @@ export const CartContextProvider = ({ children }) => {
                     }
                 });
             
+            setFlag(!flag)
         } catch (error) {
             console.error('Sign up failed:', error);
         }
-    }  
+        setLoading(false)
+    }
 
 
-    const getUserCart = async (userId) => {
+    const getUserCart = async (userId,query,page) => {
+        if (loading) return;
         try {
-            const response = await axios.get(`${baseUrl}/cart?userId=${userId}`,
-            {
-                headers: {
-                    Authorization: localStorage.getItem("token")
+            setLoading(true)
+            const response = await axios.get(`${baseUrl}/cart?userId=${userId}&cartStatus=${query}&page=${page}`,
+                {
+                    headers: {
+                        Authorization: localStorage.getItem("token")
+                    }
                 }
-            }
-           
-                );
-            
-                setCart(response.data.data)
-               
-            
-        } catch (error) {
+
+            );
+
+            setCart(response.data.data)
+            } catch (error) {
             console.error('cart fetching error', error);
         }
-    } 
-    
+        setLoading(false)
+    }
+
+    const cartUpdate = async (cartId, updateData) => {
+        try {
+            setLoading(true)
+            const response = await axios.patch(`${baseUrl}/cart/update/${cartId}`, { months: updateData.months, startDate: updateData.startDate, status: updateData.status },
+                {
+                    headers: {
+                        Authorization: localStorage.getItem("token")
+                    }
+                });
+         
+            setFlag(!flag)
+        } catch (error) {
+            console.error('cart update failed:', error);
+        }
+        setLoading(false)
+    }
+
     const fetchSingleBoard = async (boardId) => {
         try {
-          const response = await axios.get(`${baseUrl}/billboards/${boardId}`);
-          setBillboard(response.data.data);
+            setLoading(true)
+            const response = await axios.get(`${baseUrl}/billboards/${boardId}`);
+            setBillboard(response.data.data);
+
+            setFlag(!flag)
         } catch (error) {
-          console.error('Board Fetching failed:', error);
-          // Handle error, show error message, etc.
+            console.error('Board Fetching failed:', error);
+            // Handle error, show error message, etc.
         }
-      };
+        setLoading(false)
+    };
+    const handleDeleteCart = async (e, cartId) => {
+        e.preventDefault()
+        try {
+            setLoading(true)
+            const response = await axios.delete(`${baseUrl}/cart/${cartId}`,
+                {
+                    headers: {
+                        Authorization: localStorage.getItem("token")
+                    }
+                });
+            setFlag(!flag)
+        } catch (error) {
+            console.error('Board deletion failed:', error);
+            // Handle error, show error message, etc.
+        }
+        setLoading(false)
+    }
     return (
-        <CartContext.Provider value={{ 
-        addtoCart, getUserCart,
-        billboard, setBillboard,
-        fetchSingleBoard,
-        cart, setCart
-         }}>
+        <CartContext.Provider value={{
+            addtoCart, getUserCart,
+            billboard, setBillboard,
+            fetchSingleBoard,
+            cart, setCart,
+            cartUpdate,
+            handleDeleteCart,
+            flag, setFlag
+        }}>
             {children}
         </CartContext.Provider>
     );

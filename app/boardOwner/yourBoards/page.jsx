@@ -15,9 +15,6 @@ const Page = () => {
         <SignInPage />
       ) : (
         <div className="mainlist max-w-[700px] mx-auto mt-2">
-          <h1 className="text-2xl font-bold mx-2 pb-2 px-1 md:mx-0">
-            Your boards
-          </h1>
           <YourBoards />
         </div>
       )}

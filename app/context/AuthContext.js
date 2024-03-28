@@ -11,16 +11,18 @@ export const AuthProvider = ({ children }) => {
   const [prevRoute, setPrevRoute] = useState("/")
   const [isModalOpen, setModalOpen] = useState(false);
   const baseUrl = "http://localhost:8000/api/v1/users";
+  const [loading, setLoading]= useState(false)
   useEffect(() => {
     if (!user) {
       auth().then((res) => {
         setUser(res?.data.user)
-        // console.log(res.data.user.name);
       })
+      // setLoading(false)
     }
   }, [user])
   const auth = async () => {
     try {
+      // setLoading(true)
       const response = await axios.get(`${baseUrl}`, {
         credentials: 'include', // Include cookies in the request
         headers: {
@@ -28,6 +30,7 @@ export const AuthProvider = ({ children }) => {
           Authorization: localStorage.getItem('token')
         }
       });
+      // setLoading(false)
       // console.log("initial", response.data);
       return response.data;
     } catch (error) {
@@ -50,9 +53,13 @@ export const AuthProvider = ({ children }) => {
     e.preventDefault();
 
     try {
+      setLoading(true)
       const response = await axios.post(`${baseUrl}/signup`, formData);
+
       console.log('Sign up successful:', response.data);
       setUser(response.data);
+      setLoading(false)
+
       if (prevRoute === "/signIn") {
         console.log("signin");
         setPrevRoute("/")
@@ -70,12 +77,17 @@ export const AuthProvider = ({ children }) => {
   const handleSignIn = async (e, formData) => {
     e.preventDefault();
     try {
+      setLoading(true)
+
       const response = await axios.post(`${baseUrl}/login`, formData);
+      setUser(response.data.data.user);
+      setLoading(false)
+
       if (prevRoute === "/signUp") {
         setPrevRoute("/")
         router.back();
       }
-      setUser(response.data.data.user);
+      
       localStorage.setItem("token", response.data.data.accessToken);
       router.back();
       console.log('Sign in successful:', " ", response.data);
@@ -94,6 +106,7 @@ export const AuthProvider = ({ children }) => {
           prevRoute, setPrevRoute,
           isModalOpen, setModalOpen,
           openModal, closeModal,
+          loading, setLoading
         }
       }
     >

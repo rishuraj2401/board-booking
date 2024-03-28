@@ -13,6 +13,7 @@ export const BoardContextProvider = ({ children }) => {
   const [yourBoards, setYourBoards]= useState(null)
   const baseUrl = "http://localhost:8000/api/v1";
   const [flag,setFlag]=useState(false);
+  const {loading,setLoading}=useContext(AuthContext)
 
 
   const addBoard = async (formData) => {
@@ -56,54 +57,71 @@ export const BoardContextProvider = ({ children }) => {
     e.preventDefault();
     console.log("formdata is recieved");
     try {
+      setLoading(true)
+      
       const response = await axios.delete(`${baseUrl}/billboards/${id}`, 
         {
           headers: {
             Authorization: localStorage.getItem("token")
           }
         });
-      setFlag(!flag)
 
+      setFlag(!flag)
+      
       console.log(response.data)
     
     } catch (error) {
       console.error('updation failed', error);
       // Handle error, show error message, etc.
     }
+    setLoading(false)
 
   };
 
   const fetchSingleBoard = async (boardId) => {
     try {
+      setLoading(true)
       const response = await axios.get(`${baseUrl}/billboards/${boardId}`);
       setBoardData(response.data.data);
+     
+
     } catch (error) {
       console.error('Board Fetching failed:', error);
       // Handle error, show error message, etc.
     }
+    setLoading(false)
   };
 
-  const fetchListofBoard = async () => {
+  const fetchListofBoard = async (query, page) => {
+    // e.preventDefault()
+    if(loading) return ;
+    setLoading(true)
     try {
-      const response = await axios.get(`${baseUrl}/billboards`);
+      const response = await axios.get(`${baseUrl}/billboardspage=${page}&query=${query}`);    
       setBoardsList(response.data.data);
+      
     } catch (error) {
       console.error('Boards Fetching failed:', error);
       // Handle error, show error message, etc.
     }
+    setLoading(false) 
+    return ; 
   };
-  const fetchYourBoard = async () => {
+  const fetchYourBoard = async (query,page) => {
     try {
-      const response = await axios.get(`${baseUrl}/yourboards`,{
+      setLoading(true)
+      const response = await axios.get(`${baseUrl}/yourboards?page=${page}&query=${query}`,{
         headers: {
           Authorization: localStorage.getItem("token")
         }
       });
       setYourBoards(response.data.data);
+     
     } catch (error) {
       console.error('Boards Fetching failed:', error);
       // Handle error, show error message, etc.
     }
+    setLoading(false)
   };
 
   return (
