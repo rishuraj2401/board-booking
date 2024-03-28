@@ -75,9 +75,9 @@ function BillboardComponent({ params }) {
                 onClick={handelAddtoCart}
                 className="p-4 bg-blue-700 rounded-lg w-full"
               >
-                <h1 className="text-white text-xl py-3 font-bold">
+                <button type="button" className="text-white text-xl py-3 font-bold" onClick={()=>addtoCart(params.boardid)}>
                   Add to cart
-                </h1>
+                </button>
               </div>
             </div>
           </div>

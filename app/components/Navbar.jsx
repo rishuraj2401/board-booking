@@ -7,7 +7,7 @@ import { FaChevronDown } from "react-icons/fa";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { user } = useContext(AuthContext);
+  const { user,setUser } = useContext(AuthContext);
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
   };
@@ -16,6 +16,11 @@ const Navbar = () => {
 
   // Toggles the state of the dropdown menu
   const toggleDropdown = () => setIsOpen(!isOpen);
+  const handleLogout=(e)=>{
+    e.preventDefault();
+    localStorage.removeItem("token");
+    setUser("");
+  }
 
   return (
     <nav className="bg-black p-4 sticky top-0 z-20">
@@ -74,7 +79,7 @@ const Navbar = () => {
                 </div>
 
                 {isOpen && (
-                  <button className="absolute right-0 my-1 btn btn-error w-48">LogOut</button>
+                  <button className="absolute right-0 my-1 btn btn-error w-48" onClick={handleLogout}>LogOut</button>
                 )}
               </div>
 
