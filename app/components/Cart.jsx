@@ -8,30 +8,19 @@ import { BoardContext } from "../context/BoardContext";
 
 const Cart = () => {
   const { user } = useContext(AuthContext)
-  const { getUserCart, cart,flag } = useContext(CartContext);
-  const [query,setQuery]=useState("")
-  const [page,setPage]=useState(1)
+  const { getUserCart, cart, flag } = useContext(CartContext);
+  const [query, setQuery] = useState("")
+  const [page, setPage] = useState(1)
 
 
 
   useEffect(() => {
     // document.getElementById("dateField").setAttribute("min", today);
     if (user) {
-      getUserCart(user?._id, query,page)
+      getUserCart(user?._id, query, page)
 
     }
-  }, [user,flag,page]);
-
-  // const billboards = [
-  //   {
-  //     id: 2,
-  //     imageUrl: "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0",
-  //     landmark: "Jaydev Bihar",
-  //     location: "Bhubaneswar,odisha,India",
-  //     price: "Rs.10000 /month",
-  //   },
-  // ];
-
+  }, [user, flag, page]);
   return (
     <div className="container mx-auto">
       <div className="grid grid-cols-1  max-w-[700px]  mx-auto gap-4">
@@ -41,11 +30,11 @@ const Cart = () => {
               className="w-full text-white py-2 px-4 outline-none bg-black"
               type="text"
               placeholder="Search..."
-              onChange={(e)=>setQuery(e.target.value)}
-              
+              onChange={(e) => setQuery(e.target.value)}
+
             />
             <div className="p-2">
-              <button className="text-white bg-black px-2 flex items-center focus:outline-none" onClick={(e)=>{e.preventDefault(),getUserCart(user?._id, query,page)}} >
+              <button className="text-white bg-black px-2 flex items-center focus:outline-none" onClick={(e) => { e.preventDefault(), getUserCart(user?._id, query, page) }} >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-5 w-5"
@@ -66,7 +55,7 @@ const Cart = () => {
           <h1 className="text-2xl font-bold mx-2 py-2 px-1 md:mx-0 ">My Cart</h1>
         </div>
         {cart?.map((cartItem) => (
-          <CartBoards board={cartItem} key={cartItem}/>
+          <CartBoards board={cartItem} key={cartItem._id} />
         ))}
       </div>
     </div>
@@ -76,17 +65,24 @@ const Cart = () => {
 export default Cart;
 const CartBoards = ({ board }) => {
   const [image, setImage] = useState(null);
-  const { fetchSingleBoard, billboard, cartUpdate,handleDeleteCart } = useContext(CartContext)
-  const [updateData, setUpdateData] = useState({ months:billboard.months, startDate:billboard.startDate, status:billboard.status })
-
   const today = new Date().toISOString().split("T")[0];
+  const { fetchSingleBoard, cartUpdate, handleDeleteCart } = useContext(CartContext)
+  const [billboard, setBillboard]=useState('');
+  const [updateData, setUpdateData] = useState({ months:board.months, startDate:new Date().toDateString, status:board.status })
+
   useEffect(() => {
     // const today = new Date().toISOString().split("T")[0];
+    console.log("this is cartid", board.billBoardId);
     fetchSingleBoard(board.billBoardId)
+    .then((res)=>{if(res.statusCode===200){
+      setBillboard(res.data);
+      // setUpdateData({months:res.data.months, startDate:res.data.startDate, status:res.data.status})
+    }
+    })
   }, [])
+
   const handleImageChange = (e) => {
     const selectedImage = e.target.files[0];
-
     if (selectedImage) {
       const reader = new FileReader();
       reader.onload = () => {
@@ -95,20 +91,18 @@ const CartBoards = ({ board }) => {
       reader.readAsDataURL(selectedImage);
     }
   };
+  useEffect(()=>{
+    cartUpdate(board._id, updateData);
+  },[updateData.status])
   const handlePay = () => {
     console.log("this is data to be updated", updateData);
-    cartUpdate(board._id, updateData);
+    setUpdateData((prev) => ({ ...prev, status: "booked" }))
 
   }
-  const handleEmailRequest=(e)=>{
-       e.preventDefault();
-       console.log("this is data to be updated", updateData);
-       setUpdateData((prev)=>({...prev, status:"pending"}))
-       cartUpdate(board._id, updateData)
-       
+  const handleEmailRequest =async (e) => {
+    e.preventDefault();
+    setUpdateData((prev) => ({...prev, status: "pending" }))
   }
-
-
   return (
     <div
       className="flex relative mx-2 md:mx-0 flex-col md:flex-row lg:flex-row bg-gray-300 rounded-lg overflow-hidden"
@@ -127,7 +121,7 @@ const CartBoards = ({ board }) => {
         />
       </div>
       <div className="p-4 flex flex-col justify-between leading-normal">
-        <h5 className="text-gray-900 text-lg">{billboard?.address?.landmark}</h5>
+        <h5 className="text-gray-900 text-lg">{billboard?.address?.landmark},{billboard.billBoardId}</h5>
         <p className="text-gray-700 text-sm mb-2 font-medium">
           {billboard?.address?.city}, {billboard?.address?.state}, {billboard?.address?.country}
         </p>
@@ -141,7 +135,7 @@ const CartBoards = ({ board }) => {
             className="bg-gray-300 border p-1 disabled:opacity-50 disabled:cursor-not-allowed"
             value={updateData.months ? updateData.months : board.months}
             onChange={(e) => setUpdateData((prev) => ({ ...prev, months: e.target.value }))}
-            disabled={board.status==="cart"|| board.status==="cancelled" ?false:true}
+            disabled={board.status === "cart" || board.status === "cancelled" ? false : true}
           >
             <option value={1}>1</option>
             <option value={2}>2</option>
@@ -162,16 +156,11 @@ const CartBoards = ({ board }) => {
             className="bg-gray-300 border p-1 disabled:opacity-50 disabled:cursor-not-allowed"
             value={updateData.startDate ? updateData.startDate : board?.startDate}
             onChange={(e) => setUpdateData((prev) => ({ ...prev, startDate: e.target.value }))}
-            disabled={board.status==="cart"|| board.status==="cancelled"?false:true}
+            disabled={board.status === "cart" || board.status === "cancelled" ? false : true}
           />
         </div>
-        {board.status !== "booked" ? (<><div className="p-[4px] border-2 text-gray-700 border-pink-500 rounded-md" onClick={handleEmailRequest}>
-          <button type="button" 
-          className="disabled:opacity-50 disabled:cursor-not-allowed"
-          disabled={board.status==="cart"|| board.status==="cancelled" ?false:true}
-          >Request a Confirmation</button> </div></>) :
-       <></> }
-        {board.status=="booked"?(<>
+
+        {board.status == "booked" ? (<>
           <div>
             <label
               htmlFor="imageUpload"
@@ -196,7 +185,7 @@ const CartBoards = ({ board }) => {
                 <img src={image} alt="Preview" className="max-h-xs" />
               </div>
             )}
-          </div></>):<></>}  
+          </div></>) : <></>}
       </div>
       <div className="flex items-end m-2">
         <div className="">
@@ -206,18 +195,24 @@ const CartBoards = ({ board }) => {
           >
             {board.status}
           </button>
-          <button
-            type="button"
-            className="m-1 p-2 w-full text-sm bg-green-800 text-white rounded disabled:opacity-50 disabled:cursor-not-allowed"
-            onClick={handlePay}
-            disabled={board.status==="confirm"?false:true}
-          >
-            Pay & Book
-          </button>
+          {board.status !== "booked" && board.status!=="confirm"? (<>
+            <button type="button"  onClick={handleEmailRequest}
+             className="m-1 p-2 w-full text-sm bg-green-800 text-white rounded disabled:opacity-50 disabled:cursor-not-allowed"
+              disabled={board.status === "cart" || board.status === "cancelled" ? false : true}
+            >Request a Confirmation</button></>) :
+            <> <button
+              type="button"
+              className="m-1 p-2 w-full text-sm bg-green-800 text-white rounded disabled:opacity-50 disabled:cursor-not-allowed"
+              onClick={handlePay}
+              disabled={board.status === "confirm" ? false : true}
+            >
+              Pay & Book
+            </button></>}
+
           <button
             type="button"
             className="m-1 mr-2 p-2 w-full text-sm bg-red-600 text-white rounded"
-            onClick={(e)=>handleDeleteCart(e,board._id)}
+            onClick={(e) => handleDeleteCart(e, board._id)}
           >
             Delete
           </button>

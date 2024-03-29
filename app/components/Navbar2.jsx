@@ -61,6 +61,9 @@ const Navbar2 = () => {
               <Link href="/boardOwner/bookedboards" className="text-white">
                 Booked Boards
               </Link>
+              <Link href="/boardOwner/requests" className="text-white">
+                Booking Requests
+              </Link>
 
               {/* for use name display and logout */}
               <div className="relative">
@@ -117,6 +120,12 @@ const Navbar2 = () => {
                 className="block py-2 px-4 text-white"
               >
                 BookedBoards
+              </Link>
+              <Link
+                href="/boardOwner/requests"
+                className="block py-2 px-4 text-white"
+              >
+                BookingRequests
               </Link>
 
               {/* for use name display and logout */}

@@ -70,11 +70,12 @@ export const CartContextProvider = ({ children }) => {
             setLoading(true)
             const response = await axios.get(`${baseUrl}/billboards/${boardId}`);
             setBillboard(response.data.data);
-
             setFlag(!flag)
+            console.log('fetchSingleboard', response.data)
+            setLoading(false)
+            return response.data
         } catch (error) {
             console.error('Board Fetching failed:', error);
-            // Handle error, show error message, etc.
         }
         setLoading(false)
     };

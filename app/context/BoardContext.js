@@ -18,6 +18,7 @@ export const BoardContextProvider = ({ children }) => {
 
   const addBoard = async (formData) => {
     console.log("formdata is recieved", formData);
+    setLoading(true)
     try {
       const response = await axios.post(`${baseUrl}/billboards`, formData,
         {
@@ -32,10 +33,12 @@ export const BoardContextProvider = ({ children }) => {
       console.error('Sign up failed:', error);
       // Handle error, show error message, etc.
     }
+    setLoading(false)
 
   };
   const updateBoard = async (formData,id) => {
     console.log("formdata is recieved", formData);
+    setLoading(true)
     try {
       const response = await axios.patch(`${baseUrl}/billboards/update/${id}`, formData,
         {
@@ -44,14 +47,12 @@ export const BoardContextProvider = ({ children }) => {
           }
         });
       console.log(response.data)
-      setFlag(!flag)
-
-    
+      setFlag(!flag)    
     } catch (error) {
       console.error('updation failed', error);
       // Handle error, show error message, etc.
     }
-
+    setLoading(false)
   };
   const deleteBoard = async (e,id) => {
     e.preventDefault();
@@ -97,7 +98,7 @@ export const BoardContextProvider = ({ children }) => {
     if(loading) return ;
     setLoading(true)
     try {
-      const response = await axios.get(`${baseUrl}/billboardspage=${page}&query=${query}`);    
+      const response = await axios.get(`${baseUrl}/billboards?page=${page}&query=${query}`);    
       setBoardsList(response.data.data);
       
     } catch (error) {

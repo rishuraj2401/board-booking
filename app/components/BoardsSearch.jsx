@@ -17,7 +17,7 @@ const BillboardCards = () => {
               <input
                 className="w-full text-white py-2 px-4 outline-none bg-black"
                 type="text"
-                placeholder="Search..."
+                placeholder="Search landmark, city, state..."
                 onChange={(e)=>setQuery(e.target.value)}
               />
               <div className="p-2">
