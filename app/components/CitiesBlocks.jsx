@@ -1,5 +1,12 @@
-import React from "react";
+"use client";
+import React, { useContext, useState } from "react";
+import { BoardContext } from "../context/BoardContext";
+import { useRouter } from "next/navigation";
+// import {  } from "next/router";
 const CitiesBlocks = () => {
+  // const [city, setCity]= useState('')
+  const {fetchListofBoard,city,setCity}=useContext(BoardContext)
+  const router=useRouter()
   const citiesData = [
     { id: 1, name: "Mumbai" },
     { id: 2, name: "Delhi" },
@@ -14,6 +21,13 @@ const CitiesBlocks = () => {
     { id: 11, name: "Bhubaneswar" },
     { id: 12, name: "Visakhapatnam" },
   ];
+  const handleCityClick=(cityName)=>{
+    // fetchListofBoard(cityName,1);
+    setCity(cityName)
+    router.push('/boardsearch');
+    
+
+  }
   return (
     <div>
       <div className="container mx-auto mt-3">
@@ -22,7 +36,7 @@ const CitiesBlocks = () => {
           {citiesData.map((city) => (
             <div
               key={city.id}
-              // onClick={() => handleCityClick(city.name)}
+              onClick={() => handleCityClick(city.name)}
               className="py-[4rem] rounded flex items-center justify-center bg-gray-400 cursor-pointer"
             >
               <h1 className="text-2xl font-semibold text-black">

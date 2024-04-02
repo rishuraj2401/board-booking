@@ -4,8 +4,8 @@ import { useEffect, useContext, useState } from "react";
 import { BoardContext } from "../context/BoardContext";
 import Link from "next/link";
 const BillboardCards = () => {
-  const { fetchListofBoard, boardsList } = useContext(BoardContext);
-  const [query,setQuery]=useState("")
+  const { fetchListofBoard, boardsList,city } = useContext(BoardContext);
+  const [query,setQuery]=useState(city)
   const [page,setPage]=useState(1)
   useEffect(()=>{ 
     fetchListofBoard(query,page);
@@ -19,6 +19,7 @@ const BillboardCards = () => {
                 type="text"
                 placeholder="Search landmark, city, state..."
                 onChange={(e)=>setQuery(e.target.value)}
+                value={query}
               />
               <div className="p-2">
                 <button className="text-white bg-black px-2 flex items-center focus:outline-none"

@@ -10,6 +10,7 @@ export const CartContextProvider = ({ children }) => {
     const [flag, setFlag] = useState(false)
     const { loading, setLoading } = useContext(AuthContext)
     const [request,setRequest]=useState([])
+    const [myorders,setMyorders]=useState([])
     const baseUrl = "http://localhost:8000/api/v1";
     const addtoCart = async (boardId) => {
         try {
@@ -61,6 +62,24 @@ export const CartContextProvider = ({ children }) => {
                 }
             );
             setRequest(response.data.data)
+            // setFlag(!flag)
+            } catch (error) {
+            console.error('cart fetching error', error);
+        }
+        setLoading(false)
+    }
+    const getMyOrders = async (page) => {
+        if (loading) return;
+        try {
+            setLoading(true)
+            const response = await axios.get(`${baseUrl}/myorders`,
+                {
+                    headers: {
+                        Authorization: localStorage.getItem("token")
+                    }
+                }
+            );
+            setMyorders(response.data.data)
             // setFlag(!flag)
             } catch (error) {
             console.error('cart fetching error', error);
@@ -127,6 +146,7 @@ export const CartContextProvider = ({ children }) => {
             handleDeleteCart,
             flag, setFlag,
             getCartRequest,
+            myorders,setMyorders,getMyOrders
         }}>
             {children}
         </CartContext.Provider>

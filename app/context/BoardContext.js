@@ -11,6 +11,7 @@ export const BoardContextProvider = ({ children }) => {
   const [boardsList, setBoardsList] = useState([]);
   const [boardData, setBoardData] = useState(null);
   const [yourBoards, setYourBoards]= useState(null)
+  const [city,setCity]=useState('')
   const baseUrl = "http://localhost:8000/api/v1";
   const [flag,setFlag]=useState(false);
   const {loading,setLoading}=useContext(AuthContext)
@@ -132,7 +133,8 @@ export const BoardContextProvider = ({ children }) => {
         boardsList, setBoardsList, addBoard,
         fetchYourBoard, setYourBoards,yourBoards,
         updateBoard , deleteBoard,
-        flag, setFlag
+        flag, setFlag,
+        city,setCity
         }}>
       {children}
     </BoardContext.Provider>

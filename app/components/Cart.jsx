@@ -51,9 +51,8 @@ const Cart = () => {
               </button>
             </div>
           </div>
-
-          <h1 className="text-2xl font-bold mx-2 py-2 px-1 md:mx-0 ">My Cart</h1>
         </div>
+        <h1 className="text-2xl font-bold mx-2 py-2 px-1 md:mx-0 ">My Cart</h1>
         {cart?.map((cartItem) => (
           <CartBoards board={cartItem} key={cartItem._id} />
         ))}
@@ -72,9 +71,9 @@ const CartBoards = ({ board }) => {
 
   useEffect(() => {
     // const today = new Date().toISOString().split("T")[0];
-    console.log("this is cartid", board.billBoardId);
-    fetchSingleBoard(board.billBoardId)
-    .then((res)=>{if(res.statusCode===200){
+    console.log("this is cartid", board.billBoardId._id);
+    fetchSingleBoard(board.billBoardId._id)
+    .then((res)=>{if(res?.statusCode===200){
       setBillboard(res.data);
       // setUpdateData({months:res.data.months, startDate:res.data.startDate, status:res.data.status})
     }
