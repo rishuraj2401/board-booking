@@ -27,7 +27,7 @@ const YourBoards = () => {
   return (yourBoards ?
     <>
       <div className="container mx-auto py-2">
-      <div className="flex items-center max-w-[700px] my-3 mx-2 sm:mx-auto md:py-2 bg-black rounded border-none overflow-hidden">
+      {/* <div className="flex items-center max-w-[700px] my-3 mx-2 sm:mx-auto md:py-2 bg-black rounded border-none overflow-hidden">
             <input
               className="w-full text-white py-2 px-4 outline-none bg-black"
               type="text"
@@ -52,7 +52,7 @@ const YourBoards = () => {
                 </svg>
               </button>
             </div>
-        </div>
+        </div> */}
         <h1 className="text-2xl font-bold mx-2 pb-2 px-1 md:mx-0">
           Your boards
         </h1>

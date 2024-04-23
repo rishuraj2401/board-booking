@@ -68,6 +68,26 @@ export const CartContextProvider = ({ children }) => {
         }
         setLoading(false)
     }
+
+    const getBookedBoards = async (page) => {
+        if (loading) return;
+        try {
+            setLoading(true)
+            const response = await axios.get(`${baseUrl}/bookedboards`,
+                {
+                    headers: {
+                        Authorization: localStorage.getItem("token")
+                    }
+                }
+            );
+            setRequest(response.data.data)
+            // setFlag(!flag)
+            } catch (error) {
+            console.error('cart fetching error', error);
+        }
+        setLoading(false)
+    }
+
     const getMyOrders = async (page) => {
         if (loading) return;
         try {
@@ -146,7 +166,8 @@ export const CartContextProvider = ({ children }) => {
             handleDeleteCart,
             flag, setFlag,
             getCartRequest,
-            myorders,setMyorders,getMyOrders
+            myorders,setMyorders,getMyOrders,
+            getBookedBoards
         }}>
             {children}
         </CartContext.Provider>
