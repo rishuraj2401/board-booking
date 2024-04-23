@@ -53,7 +53,7 @@ const Navbar = () => {
           <Link href="/boardOwner" target="_blank" className="text-white">
             Board Owners
           </Link>
-          <Link href="/boardsearch" className="text-white">
+          <Link href="/boardsearch?query=" className="text-white">
             Available Boards
           </Link>
 
@@ -115,7 +115,7 @@ const Navbar = () => {
           >
             Board owners
           </Link>
-          <Link href="/boardsearch" className="block py-2 px-4 text-white">
+          <Link href="/boardsearch?query=" className="block py-2 px-4 text-white">
             Available Boards
           </Link>
           {user ? (

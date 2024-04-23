@@ -12,7 +12,7 @@ const CitiesBlocks = () => {
     { id: 2, name: "Delhi" },
     { id: 3, name: "Kolkata" },
     { id: 4, name: "Chennai" },
-    { id: 5, name: "Bangalore" },
+    { id: 5, name: "Bangaluru" },
     { id: 6, name: "Hyderabad" },
     { id: 7, name: "Ahmedabad" },
     { id: 8, name: "Pune" },
@@ -23,8 +23,8 @@ const CitiesBlocks = () => {
   ];
   const handleCityClick=(cityName)=>{
     // fetchListofBoard(cityName,1);
-    setCity(cityName)
-    router.push('/boardsearch');
+    // setCity(cityName)
+    router.push(`/boardsearch?query=${cityName}`);
     
 
   }
