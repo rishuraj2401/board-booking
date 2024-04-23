@@ -1,5 +1,7 @@
 "use client";
 import React, { useState, useEffect, useContext } from "react";
+// import { ToastContainer, toast } from 'react-toastify';
+// import 'react-toastify/dist/ReactToastify.css';
 import Navbar from "./Navbar";
 import Image from "next/image";
 import { CartContext } from "../context/CartContext";
@@ -11,7 +13,7 @@ const Cart = () => {
   const { getUserCart, cart, flag } = useContext(CartContext);
   const [query, setQuery] = useState("")
   const [page, setPage] = useState(1)
-
+  const notify = () => toast("This is a toast message!");
 
 
   useEffect(() => {
@@ -23,9 +25,11 @@ const Cart = () => {
   }, [user, flag, page]);
   return (
     <div className="container mx-auto">
+      {/* <button onClick={notify}>Show Toast</button>
+      <ToastContainer /> */}
       <div className="grid grid-cols-1  max-w-[700px]  mx-auto gap-4">
         <div className="sticky top-[60px]  z-10">
-          <div className="flex items-center max-w-[700px] my-3 mx-2 sm:mx-auto md:py-2 bg-black rounded border-none overflow-hidden">
+          {/* <div className="flex items-center max-w-[700px] my-3 mx-2 sm:mx-auto md:py-2 bg-black rounded border-none overflow-hidden">
             <input
               className="w-full text-white py-2 px-4 outline-none bg-black"
               type="text"
@@ -50,7 +54,7 @@ const Cart = () => {
                 </svg>
               </button>
             </div>
-          </div>
+          </div> */}
         </div>
         <h1 className="text-2xl font-bold mx-2 py-2 px-1 md:mx-0 ">My Cart</h1>
         {cart?.map((cartItem) => (

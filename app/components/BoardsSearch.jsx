@@ -5,7 +5,7 @@ import { BoardContext } from "../context/BoardContext";
 import Link from "next/link";
 const BillboardCards = () => {
   const { fetchListofBoard, boardsList,city } = useContext(BoardContext);
-  const [query,setQuery]=useState(city)
+  const [query,setQuery]=useState('')
   const [page,setPage]=useState(1)
   useEffect(()=>{ 
     fetchListofBoard(query,page);
