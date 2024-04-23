@@ -11,13 +11,13 @@ const BillboardCards = () => {
   const [query, setQuery] = useState("");
   const [page, setPage] = useState(1);
   let q;
-useEffect(()=>{
-  const params = new URLSearchParams(window.location.search);
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
 
-  // Access specific query parameters by name
-   q = params.get('query');
-  console.log(q)
-},[query])
+    // Access specific query parameters by name
+    q = params.get("query");
+    console.log(q);
+  }, [query]);
 
   useEffect(() => {
     fetchListofBoard(q, page);
